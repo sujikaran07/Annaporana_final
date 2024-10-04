@@ -24,28 +24,16 @@
         <activity
             android:name=".PageProfileYourRecipes"
             android:exported="false" />
-
-        <!-- PageSearch Activity -->
         <activity
-            android:name=".PageSearch"
+            android:name=".RecipeUploadPage"
             android:exported="false" />
 
-        <!-- Other activities... -->
+
+
         <activity
             android:name=".PageProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".PageProfile"
-            android:exported="false" />
-        <activity
-            android:name=".PageFavourite"
-            android:exported="false" />
-        <activity
-            android:name=".PageHome"
-            android:exported="false" />
-        <activity
-            android:name=".PageAdd"
-            android:exported="false" />
+
 
         <!-- Firebase notification metadata -->
         <meta-data

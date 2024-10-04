@@ -33,7 +33,8 @@
             android:layout_height="40dp"
             android:background="@drawable/btn_radius"
             android:text="Save"
-            android:textSize="16sp"
+            android:textSize="14sp"
+            android:padding="2dp"
             android:textColor="@color/black"
             style="@style/CustomButtonStyle5"
             android:layout_marginStart="130dp"
@@ -45,10 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="Upload"
-            android:textSize="16sp"
+            android:padding="2dp"
+            style="@style/CustomButtonStyle5"
+            android:textSize="14sp"
             android:textColor="@color/black"
-            android:background="@drawable/btn_radius"
-            style="@style/CustomButtonStyle4" />
+            android:background="@drawable/btn_radius" />
     </LinearLayout>
 
     <!-- FrameLayout to overlay VideoView and TextView -->
@@ -87,6 +89,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <!-- Title Input Field -->
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title : My best recipe ever"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                android:layout_marginTop="10dp" />
+
+            <!-- Description Input Field -->
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Share a little more about this dish..."
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:minHeight="100dp"
+                android:gravity="top"
+                android:layout_marginTop="10dp" />
 
             <!-- Horizontal layout for Serves -->
             <LinearLayout
