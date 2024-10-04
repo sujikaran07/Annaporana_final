@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recipeapp">
+
     <!-- Permissions -->
     <!-- For Firebase Cloud Messaging and notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -18,12 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp"
         tools:targetApi="31">
+
+        <!-- PageProfileYourRecipes Activity -->
         <activity
             android:name=".PageProfileYourRecipes"
             android:exported="false" />
+
+        <!-- PageSearch Activity -->
         <activity
             android:name=".PageSearch"
             android:exported="false" />
+
+        <!-- Other activities... -->
         <activity
             android:name=".PageProfileActivity"
             android:exported="false" />
@@ -39,15 +46,15 @@
         <activity
             android:name=".PageAdd"
             android:exported="false" />
+
+        <!-- Firebase notification metadata -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
 
+        <!-- Other public pages -->
         <activity
             android:name=".ForgotPasswordPage"
-            android:exported="true" />
-        <activity
-            android:name=".HomePage"
             android:exported="true" />
         <activity
             android:name=".LoginPage"
@@ -70,15 +77,23 @@
         <activity
             android:name=".NotificationPage"
             android:exported="true" />
+
+        <!-- Main activity: GetStartPage -->
         <activity
             android:name=".GetStartPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- HomePage Activity with windowSoftInputMode to prevent BottomNavigationView from rising -->
+        <activity
+            android:name=".HomePage"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" /> <!-- This keeps BottomNavigationView fixed even when the keyboard opens -->
+
     </application>
 
 </manifest>

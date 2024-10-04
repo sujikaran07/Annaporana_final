@@ -31,6 +31,7 @@
             android:padding="16dp"
             android:layout_gravity="center">
 
+            <!-- Popular Button -->
             <Button
                 android:id="@+id/btnPopular"
                 android:layout_width="0dp"
@@ -38,35 +39,38 @@
                 android:layout_columnWeight="1"
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:text="Popular"
                 android:textColor="#000000"
                 android:layout_margin="8dp" />
 
+            <!-- Rice Button -->
             <Button
                 android:id="@+id/btnRice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:background="@drawable/btn_9"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 style="@style/CustomButtonStyle2"
                 android:text="Rice"
                 android:textColor="#000000"
                 android:layout_margin="8dp" />
 
+            <!-- Curries Button -->
             <Button
                 android:id="@+id/btnCurries"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
                 android:text="Curries"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
 
+            <!-- Gravy Button -->
             <Button
                 android:id="@+id/btnGravy"
                 android:layout_width="0dp"
@@ -75,10 +79,11 @@
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
                 android:text="Gravy"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
 
+            <!-- Side Dish Button -->
             <Button
                 android:id="@+id/btnSideDish"
                 android:layout_width="0dp"
@@ -86,11 +91,12 @@
                 android:layout_columnWeight="1"
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
-                android:text="Side Dish"
-                android:textSize="14sp"
+                android:text="Fries"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
 
+            <!-- Dessert Button -->
             <Button
                 android:id="@+id/btnDessert"
                 android:layout_width="0dp"
@@ -99,22 +105,24 @@
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
                 android:text="Dessert"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
 
+            <!-- Festival Button -->
             <Button
                 android:id="@+id/btnFestival"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:background="@drawable/btn_9"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 style="@style/CustomButtonStyle2"
                 android:text="Festival"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
 
+            <!-- Juice Button -->
             <Button
                 android:id="@+id/btnJuice"
                 android:layout_width="0dp"
@@ -123,10 +131,11 @@
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
                 android:text="Juice"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
 
+            <!-- Soup Button -->
             <Button
                 android:id="@+id/btnSoup"
                 android:layout_width="0dp"
@@ -135,7 +144,7 @@
                 android:background="@drawable/btn_9"
                 style="@style/CustomButtonStyle2"
                 android:text="Soup"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 android:layout_margin="8dp" />
         </GridLayout>
