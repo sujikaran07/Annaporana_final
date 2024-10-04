@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#000000"
+    tools:context=".PageSettings">
+
+    <!-- Horizontal layout for back arrow and "Settings" label -->
+    <LinearLayout
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="24dp">
+
+        <!-- Back arrow icon -->
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="#FFFFFF" /> <!-- White arrow -->
+
+        <!-- Settings label -->
+        <TextView
+            android:id="@+id/settingsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="#FFFFFF"
+            android:textSize="24dp"
+            android:layout_marginStart="8dp"/> <!-- Space between arrow and text -->
+
+    </LinearLayout>
+
+    <!-- List of settings options -->
+    <TextView
+        android:id="@+id/invite_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invite Friends"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/notificationPreference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notification Preference"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/privacyPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/communityGuidelines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Community Guidelines"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/termsOfService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms of Service"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/contactUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/deleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Your Account"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/aboutApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About this Application"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+    <!-- Sign Out button -->
+    <Button
+        android:id="@+id/signOutButton"
+        style="@style/CustomButtonStyle4"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/btn_radius"
+        android:padding="14dp"
+        android:textStyle="bold"
+        android:text="Sign out"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

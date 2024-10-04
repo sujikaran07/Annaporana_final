@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/notify"
+    tools:context=".NotificationPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Space at the top -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="396dp"
+            android:layout_weight="1" />
+
+        <!-- Text informing about notifications -->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Users who enable notifications are more productive"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- Space between text elements -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="Enable notifications to achieve your goals"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <!-- Space between text and buttons -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="37dp" />
+
+        <!-- Skip Button -->
+        <Button
+            android:id="@+id/skip_button"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/black"
+            android:padding="2dp"
+            android:text="SKIP"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <!-- Enable Button to directly request notification permissions -->
+        <Button
+            android:id="@+id/enable_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/border_button"
+            android:padding="2dp"
+            android:text="ENABLE"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            style="@style/CustomButtonStyle2" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.2" />
+    </LinearLayout>
+
+</RelativeLayout>

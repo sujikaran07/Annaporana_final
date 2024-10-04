@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- Main Text -->
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_recipe"
+        android:layout_marginBottom="40dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compile your home recipes in one location"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <!-- Subtitle Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="And share with friends and family"
+        android:textColor="#B0B0B0"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="8dp" />
+
+
+
+    <!-- New Recipe Button -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Recipe"
+        android:background="@drawable/btn_10"
+        style="@style/CustomButtonStyle2"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="24dp" />
+
+</LinearLayout>

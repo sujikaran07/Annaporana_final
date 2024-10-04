@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.recipeapp">
+    <!-- Permissions -->
+    <!-- For Firebase Cloud Messaging and notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RecipeApp"
+        tools:targetApi="31">
+        <activity
+            android:name=".PageProfileYourRecipes"
+            android:exported="false" />
+        <activity
+            android:name=".PageSearch"
+            android:exported="false" />
+        <activity
+            android:name=".PageProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PageProfile"
+            android:exported="false" />
+        <activity
+            android:name=".PageFavourite"
+            android:exported="false" />
+        <activity
+            android:name=".PageHome"
+            android:exported="false" />
+        <activity
+            android:name=".PageAdd"
+            android:exported="false" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+
+        <activity
+            android:name=".ForgotPasswordPage"
+            android:exported="true" />
+        <activity
+            android:name=".HomePage"
+            android:exported="true" />
+        <activity
+            android:name=".LoginPage"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterPage"
+            android:exported="true" />
+        <activity
+            android:name=".SplashPage"
+            android:exported="true" />
+        <activity
+            android:name=".PageNo5"
+            android:exported="true" />
+        <activity
+            android:name=".PageNo4"
+            android:exported="true" />
+        <activity
+            android:name=".PageNo3"
+            android:exported="true" />
+        <activity
+            android:name=".NotificationPage"
+            android:exported="true" />
+        <activity
+            android:name=".GetStartPage"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

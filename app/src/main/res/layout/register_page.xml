@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="24dp"
+    tools:context=".RegisterPage">
+
+    <!-- Back Arrow -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:id="@+id/ic_back_arrow"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/register_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"/>
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/register_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create your new account"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Space -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <!-- Username Input -->
+    <EditText
+        android:id="@+id/username_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="user name"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:background="@drawable/edit_text_background"
+        android:padding="18dp"
+        android:drawablePadding="20dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="user@gmail.com"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:background="@drawable/edit_text_background"
+        android:padding="18dp"
+
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:drawablePadding="20dp"
+            android:drawableLeft="@drawable/baseline_lock_outline_24"
+            android:background="@drawable/edit_text_background"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"
+            android:inputType="textPassword"/>
+
+        <!-- Eye Icon to toggle password visibility -->
+        <ImageView
+            android:id="@+id/eye_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_remove_red_eye_24" />
+
+    </RelativeLayout>
+
+
+
+
+
+    <!-- Remember Me & Forgot Password Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <!-- Checkbox to remember the user -->
+        <CheckBox
+            android:id="@+id/remember_me_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Remember me"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:button="@drawable/checkbox_custom" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/forgot_password_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_radius"
+        android:padding="6dp"
+        style="@style/CustomButtonStyle2"
+        android:text="Sign up"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <!-- Space -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+
+
+    <!-- Already Have an Account Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/already_have_account_text"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="45dp"
+            android:padding="5dp"
+            android:text="Already have an account?"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/login_text"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

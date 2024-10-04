@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/image_6"
+    tools:context=".SplashPage">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:backgroundTint="#18191B"
+        android:text="Let’s try the fabulous South Indian foods !"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="0" />
+
+    <Button
+        android:id="@+id/signin_btn"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/btn_6"
+        style="@style/CustomButtonStyle2"
+        android:padding="4dp"
+        android:text="Sign in"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/create_btn"
+        style="@style/CustomButtonStyle8"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/btn_7"
+        android:padding="4dp"
+        android:text="Create an account"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+</LinearLayout>

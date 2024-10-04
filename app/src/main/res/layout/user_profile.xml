@@ -1,0 +1,181 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="16dp">
+
+    <!-- Back Button and Settings Icon -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- Back Button -->
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back_arrow"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Back"
+            android:layout_alignParentStart="true" />
+
+        <!-- Settings Icon -->
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Settings"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <!-- Profile Image and Info Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <!-- Profile Image Left Aligned -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="Profile Picture"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_vertical" />
+
+        <!-- User Details (Username, Handle) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user23"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <!-- Followers, Following, Likes Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/following_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0 Following"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/followers_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0 Followers"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/likes_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0 Likes"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Follow Button -->
+    <Button
+        android:id="@+id/follow_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Follow"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@android:color/white"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="start" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <!-- Recipe Header Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <!-- Recipes Title (Left Aligned) -->
+        <TextView
+            android:id="@+id/recipes_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Recipes(2)"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_weight="1" />
+
+        <!-- Search Icon (Right Aligned) -->
+        <ImageButton
+            android:id="@+id/search_recipes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Search Recipes" />
+    </LinearLayout>
+
+    <!-- Recipes List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipes_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+</LinearLayout>

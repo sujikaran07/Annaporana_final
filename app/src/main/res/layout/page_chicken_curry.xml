@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="10dp">
+
+    <!-- Header with Back Button and Recipe Name -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_arrow"
+            android:contentDescription="Back"
+            android:layout_marginEnd="10dp" />
+
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Recipe"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Video Frame with VideoView -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp">
+
+        <VideoView
+            android:id="@+id/curry_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:keepScreenOn="true" />
+    </FrameLayout>
+
+    <!-- Action Buttons -->
+
+    <!-- User Profile -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Like"
+            android:src="@drawable/baseline_favorite_24" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Rate"
+            android:src="@drawable/ic_star_rate" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Share"
+            android:src="@drawable/ic_share_24" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="More Options"
+            android:src="@drawable/baseline_bookmark_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_profile"
+            android:layout_marginEnd="8dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/user_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user23"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Scrollable section for Ingredients and Methods -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Ingredients Section Title -->
+            <TextView
+                android:id="@+id/ingredients_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp" />
+
+            <!-- Editable Ingredients Section -->
+            <LinearLayout
+                android:id="@+id/ingredients_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Example Ingredient Field -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="5dp">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Ingredient"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#AAAAAA"
+                        android:background="@android:color/transparent"
+                        android:textSize="14sp"
+                        android:padding="5dp"
+                        android:inputType="text" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#AAAAAA"
+                        android:background="@android:color/transparent"
+                        android:textSize="14sp"
+                        android:padding="5dp"
+                        android:inputType="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <!-- Methods Section Title -->
+            <TextView
+                android:id="@+id/methods_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Methods"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp" />
+
+            <!-- Editable Methods Section -->
+            <EditText
+                android:id="@+id/methods_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cooking methods"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"
+                android:background="@android:color/transparent"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:minLines="5" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

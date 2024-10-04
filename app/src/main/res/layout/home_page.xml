@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePage"
+    android:background="@color/black">
+
+    <!-- FrameLayout to hold dynamic content (fragments) -->
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp" />
+
+    <!-- BottomNavigationView with 5 icons, no labels, and 40dp icon size -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#1F1D1D"
+        app:menu="@menu/bottom_menu"
+        app:itemIconTint="@color/white"
+        app:itemIconSize="40dp"
+    app:labelVisibilityMode="unlabeled" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,250 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="16dp">
+
+    <!-- Top bar with Settings Icon aligned to the right -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- Settings Icon -->
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Settings"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp" />
+    </RelativeLayout>
+
+    <!-- Profile Picture and Info Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- Profile Image Centered -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="Profile Picture"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- User Name Below Profile Image -->
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Followers, Following, Likes Centered -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/followers_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" followers"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:id="@+id/following_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" following"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:id="@+id/likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" likes"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Tabs: Saved Recipes, Activity, Your Recipes -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+
+        <Button
+            android:id="@+id/saved_recipes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            android:text="Saved Recipes"
+            android:textColor="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/activity_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/your_recipes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Recipes"
+            android:textSize="13sp"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:background="?attr/selectableItemBackground" />
+    </LinearLayout>
+
+    <!-- My Ratings Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/my_ratings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="My Ratings (0)"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ratings_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Dynamically generated views for ratings go here -->
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <!-- My Tips Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/my_tips_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Tips (0)"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/tips_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Dynamically generated views for tips go here -->
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <!-- Recently Viewed Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/recently_viewed_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recently Viewed"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/recently_viewed_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Dynamically generated views for recently viewed items go here -->
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+</LinearLayout>

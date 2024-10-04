@@ -1,0 +1,151 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Greeting TextView -->
+        <TextView
+            android:id="@+id/greetingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello Ram!"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:padding="16dp" />
+
+        <!-- Category Buttons -->
+        <GridLayout
+            android:id="@+id/categoryGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:padding="16dp"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/btnPopular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:textSize="16sp"
+                android:text="Popular"
+                android:textColor="#000000"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnRice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                android:textSize="16sp"
+                style="@style/CustomButtonStyle2"
+                android:text="Rice"
+                android:textColor="#000000"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnCurries"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:textSize="16sp"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:text="Curries"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnGravy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:text="Gravy"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnSideDish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:text="Side Dish"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnDessert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:text="Dessert"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnFestival"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                android:textSize="16sp"
+                style="@style/CustomButtonStyle2"
+                android:text="Festival"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnJuice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:text="Juice"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+
+            <Button
+                android:id="@+id/btnSoup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/btn_9"
+                style="@style/CustomButtonStyle2"
+                android:text="Soup"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="8dp" />
+        </GridLayout>
+
+        <!-- Food Items RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
+</ScrollView>

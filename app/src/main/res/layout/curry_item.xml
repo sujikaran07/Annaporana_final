@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp">
+
+    <!-- FrameLayout containing the VideoView and overlays -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    <!-- Video for the Curry -->
+    <VideoView
+        android:id="@+id/curry_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:keepScreenOn="true" />
+
+    <!-- Overlay Text (Curry Name) on the Video -->
+    <TextView
+        android:id="@+id/curry_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Curry Name"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="#88000000"
+    android:padding="5dp"
+    android:layout_gravity="center" />
+
+    <!-- User Info (User Profile and Name) overlay at the bottom left of the video -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|start"
+        android:background="#88000000"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
+
+    <ImageView
+        android:id="@+id/user_profile"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_profile"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="User Profile"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:layout_gravity="center_vertical" />
+</LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Rating, Time, Serves, Calories -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/curry_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="4.9 (9)"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/curry_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="60 Min"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_time"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/curry_serves"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="5 Serves"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_meal"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/curry_calories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="780 Cal"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_cal"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+</LinearLayout>

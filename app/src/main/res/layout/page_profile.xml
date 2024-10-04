@@ -1,0 +1,237 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="16dp">
+
+    <!-- Top bar with Settings Icon aligned to the right -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- Settings Icon -->
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Settings"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp" />
+    </RelativeLayout>
+
+    <!-- Profile Picture and Info Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- Profile Image Centered -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_profile"
+            android:layout_gravity="center"
+            android:contentDescription="Profile Picture"
+            android:layout_marginBottom="8dp" />
+
+        <!-- User Name Below Profile Image -->
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Followers, Following, Likes Centered -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/followers_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" followers"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:id="@+id/following_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" following"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:id="@+id/likes_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" likes"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Tabs: Saved Recipes, Activity, Your Recipes -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/saved_recipes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            android:text="Saved Recipes"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/activity_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="Activity"
+            android:textSize="13dp"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/your_recipes_button"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Recipes"
+            android:textSize="13dp"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Search Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="16dp"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_search"
+            android:layout_marginStart="5dp"
+            android:contentDescription="Search Icon" />
+
+        <EditText
+            android:id="@+id/search_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search 0 recipes"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:background="@android:color/transparent"
+            android:paddingStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Scrollable Section for Recipes -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Saved Recipes Layout (Dynamically add recipes here) -->
+            <LinearLayout
+                android:id="@+id/saved_recipes_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <!-- No Saved Recipes Message (Visible only if no recipes exist) -->
+                <TextView
+                    android:id="@+id/no_saved_recipes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No saved recipes yet"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You haven’t saved any recipes. Find and save recipes"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="to cook and see them here!"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- Placeholder for dynamically adding saved recipe items -->
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
