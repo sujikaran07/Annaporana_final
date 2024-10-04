@@ -1,64 +1,54 @@
 package com.example.recipeapp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AddFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AddFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddFragment newInstance(String param1, String param2) {
-        AddFragment fragment = new AddFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false);
+        View view = inflater.inflate(R.layout.fragment_add, container, false);
+
+        // Find the "New Recipe" button
+        Button newRecipeButton = view.findViewById(R.id.button_recipe);
+
+        // Check if the button exists and handle accordingly
+        if (newRecipeButton != null) {
+            Log.d("FragmentAdd", "Button 'New Recipe' found successfully.");
+            // Set an OnClickListener to navigate to the RecipeUploadFragment
+            newRecipeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("FragmentAdd", "New Recipe button clicked.");
+                    // Load the RecipeUploadFragment when the button is clicked
+                    loadFragment(new RecipeUploadFragment());
+                }
+            });
+        } else {
+            Log.e("FragmentAdd", "Error: 'button_recipe' not found in the layout. Check fragment_add.xml");
+        }
+
+        return view;
+    }
+
+    // Method to load a fragment
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        // Ensure your activity contains a FrameLayout with the id 'frame_layout'
+        transaction.replace(R.id.frame_layout, fragment);
+        transaction.addToBackStack(null);  // This allows the user to navigate back
+        transaction.commit();
     }
 }

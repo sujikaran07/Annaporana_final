@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:text="New Recipe"
         android:background="@drawable/btn_10"
+        android:id="@id/button_recipe"
         style="@style/CustomButtonStyle2"
         android:textSize="16sp"
         android:textColor="@color/black"
