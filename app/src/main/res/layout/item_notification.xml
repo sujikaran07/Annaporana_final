@@ -4,31 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp"
-    android:background="?attr/selectableItemBackground">
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical">
 
-    <!-- Icon for the notification (User's profile picture) -->
+    <!-- Notification Icon (e.g., User's profile picture) -->
     <ImageView
         android:id="@+id/notificationIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@drawable/ic_profile"
         android:contentDescription="Notification Icon"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_shape"
         android:scaleType="centerCrop"
-        android:cropToPadding="true" />
+        android:cropToPadding="true"
+        android:layout_marginEnd="16dp" />
 
     <!-- Notification Text -->
     <TextView
         android:id="@+id/notificationText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Sample notification message"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1" />
+        android:maxLines="2"
+        android:ellipsize="end" />
 
 </LinearLayout>
