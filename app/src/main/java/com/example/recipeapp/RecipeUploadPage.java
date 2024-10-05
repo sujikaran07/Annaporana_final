@@ -1,11 +1,18 @@
 package com.example.recipeapp;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment; // <-- Import this class
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -15,10 +22,12 @@ import android.widget.Toast;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.VideoView;
-import android.text.TextWatcher;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +43,8 @@ import java.util.UUID;
 public class RecipeUploadPage extends AppCompatActivity {
 
     private static final int PICK_VIDEO_REQUEST = 1;
+    private static final int PERMISSION_REQUEST_CODE = 100;
+
     private Uri videoUri;
 
     // Firebase instances
@@ -49,7 +60,7 @@ public class RecipeUploadPage extends AppCompatActivity {
     private EditText titleEditText, descriptionEditText, servesEditText, cookTimeEditText, nutritionEditText, ingredientsEditText, methodsEditText;
     private Button uploadButton;
     private ImageButton closeButton;
-    private ProgressDialog progressDialog;  // Loading indicator
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +80,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         titleEditText = findViewById(R.id.titleEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         servesEditText = findViewById(R.id.servesEditText);
-        cookTimeEditText = findViewById(R.id.cookTimeEditText); // For cook time in minutes
+        cookTimeEditText = findViewById(R.id.cookTimeEditText);
         nutritionEditText = findViewById(R.id.nutritionEditText);
         ingredientsEditText = findViewById(R.id.ingredientsEditText);
         methodsEditText = findViewById(R.id.methodsEditText);
@@ -99,49 +110,102 @@ public class RecipeUploadPage extends AppCompatActivity {
 
         // Handle video upload click
         uploadVideoText.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("video/*");
-            startActivityForResult(intent, PICK_VIDEO_REQUEST);
+            if (checkPermissions()) {
+                openVideoPicker();
+            } else {
+                requestPermissions();
+            }
         });
 
         // Handle recipe submission
         uploadButton.setOnClickListener(v -> {
             if (validateFields()) {
-                // Show loading indicator
-                progressDialog.show();
-                uploadDataToFirebase();
+                if (isInternetAvailable()) {
+                    progressDialog.show();
+                    uploadDataToFirebase();
+                } else {
+                    Toast.makeText(RecipeUploadPage.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    // Check if permission is granted
+    private boolean checkPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // For Android 11 (API level 30) or higher
+            return Environment.isExternalStorageManager();
+        } else {
+            // For Android 6.0 to Android 10
+            return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
+    // Request for permission
+    private void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // For Android 11 (API level 30) or higher
+            try {
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, PERMISSION_REQUEST_CODE);
+            } catch (Exception e) {
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            // For Android 6.0 to Android 10
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                openVideoPicker();
+            } else {
+                // Permission denied
+                Toast.makeText(this, "Storage permission denied. Cannot upload video.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Open video picker if permission is granted
+    private void openVideoPicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("video/*");
+        startActivityForResult(intent, PICK_VIDEO_REQUEST);
+    }
+
+    // Check network connectivity
+    private boolean isInternetAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     // Method to handle setting video into the VideoView and setting play/pause behavior
     private void setVideoToView(Uri videoUri) {
         if (videoUri != null) {
-            videoView.setVideoURI(videoUri);  // Set the video URI to the VideoView
-            videoView.requestFocus();         // Request focus for the VideoView
-
-            // Hide the upload icon and text once the video is set
+            videoView.setVideoURI(videoUri);
+            videoView.requestFocus();
             uploadIcon.setVisibility(ImageView.GONE);
             uploadVideoText.setVisibility(TextView.GONE);
 
-            // Handle video prepared (this is necessary to have video ready for play/pause)
-            videoView.setOnPreparedListener(mp -> {
-                // Do not automatically play the video here
-            });
-
-            // Add click listener to toggle between play and pause
             videoView.setOnClickListener(v -> {
                 if (videoView.isPlaying()) {
-                    videoView.pause();  // Pause the video if it is currently playing
+                    videoView.pause();
                 } else {
-                    videoView.start();  // Play the video if it is currently paused
+                    videoView.start();
                 }
             });
 
-            // Handle video errors
             videoView.setOnErrorListener((mp, what, extra) -> {
                 Toast.makeText(RecipeUploadPage.this, "Error playing video", Toast.LENGTH_SHORT).show();
-                return true;  // Indicate that the error was handled
+                return true;
             });
         } else {
             Toast.makeText(this, "No video selected", Toast.LENGTH_SHORT).show();
@@ -153,7 +217,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         if (titleEditText.getText().toString().isEmpty() ||
                 descriptionEditText.getText().toString().isEmpty() ||
                 servesEditText.getText().toString().isEmpty() ||
-                cookTimeEditText.getText().toString().isEmpty() ||  // Now using only minutes for cook time
+                cookTimeEditText.getText().toString().isEmpty() ||
                 nutritionEditText.getText().toString().isEmpty() ||
                 ingredientsEditText.getText().toString().isEmpty() ||
                 methodsEditText.getText().toString().isEmpty()) {
@@ -174,7 +238,6 @@ public class RecipeUploadPage extends AppCompatActivity {
         if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             videoUri = data.getData();
 
-            // Check file size (max 500 MB)
             Cursor returnCursor = getContentResolver().query(videoUri, null, null, null, null);
             if (returnCursor != null) {
                 int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
@@ -182,8 +245,8 @@ public class RecipeUploadPage extends AppCompatActivity {
                 long fileSize = returnCursor.getLong(sizeIndex);
                 returnCursor.close();
 
-                if (fileSize < 500 * 1024 * 1024) {  // File size must be less than 500MB
-                    setVideoToView(videoUri); // Set the video to VideoView
+                if (fileSize < 500 * 1024 * 1024) {
+                    setVideoToView(videoUri);
                 } else {
                     Toast.makeText(this, "Video must be less than 500MB", Toast.LENGTH_SHORT).show();
                 }
@@ -195,30 +258,34 @@ public class RecipeUploadPage extends AppCompatActivity {
 
     // Upload data to Firebase (both the video and recipe details)
     private void uploadDataToFirebase() {
-        if (videoUri != null) {
-            StorageReference videoRef = storageReference.child("videos/" + UUID.randomUUID().toString());
+        FirebaseUser currentUser = auth.getCurrentUser();
 
-            videoRef.putFile(videoUri)
-                    .addOnSuccessListener(taskSnapshot -> videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        FirebaseUser currentUser = auth.getCurrentUser();
-                        if (currentUser != null) {
+        if (currentUser != null) {
+            if (videoUri != null) {
+                StorageReference videoRef = storageReference.child("videos/" + UUID.randomUUID().toString());
+
+                videoRef.putFile(videoUri)
+                        .addOnSuccessListener(taskSnapshot -> videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
                             String userId = currentUser.getUid();
                             saveRecipeDetails(uri.toString(), userId);
-                        }
-                    }))
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(RecipeUploadPage.this, "Video upload failed", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                        progressDialog.dismiss(); // Dismiss the loading indicator if the upload fails
-                    });
+                        }))
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(RecipeUploadPage.this, "Video upload failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("UploadError", e.getMessage());
+                            progressDialog.dismiss(); // Dismiss the loading indicator if the upload fails
+                        });
+            }
+        } else {
+            // If the user is not authenticated, show an error message
+            Toast.makeText(this, "User is not authenticated. Please log in first.", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 
     // Save recipe details to Firebase Realtime Database
     private void saveRecipeDetails(String videoUrl, String userId) {
         String recipeId = UUID.randomUUID().toString();
-
-        String cookTime = cookTimeEditText.getText().toString().trim(); // Use minutes for cook time
+        String cookTime = cookTimeEditText.getText().toString().trim();
 
         Map<String, Object> recipeData = new HashMap<>();
         recipeData.put("recipeId", recipeId);
@@ -226,7 +293,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         recipeData.put("title", titleEditText.getText().toString().trim());
         recipeData.put("description", descriptionEditText.getText().toString().trim());
         recipeData.put("serves", servesEditText.getText().toString().trim());
-        recipeData.put("cookTime", cookTime);  // Save only minutes
+        recipeData.put("cookTime", cookTime);
         recipeData.put("nutrition", nutritionEditText.getText().toString().trim());
         recipeData.put("ingredients", ingredientsEditText.getText().toString().trim());
         recipeData.put("methods", methodsEditText.getText().toString().trim());
@@ -236,12 +303,11 @@ public class RecipeUploadPage extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(RecipeUploadPage.this, "Recipe uploaded successfully", Toast.LENGTH_SHORT).show();
-                        // Redirect to My Recipes section to view the uploaded recipes
                         redirectToMyRecipes();
                     } else {
                         Toast.makeText(RecipeUploadPage.this, "Failed to upload recipe", Toast.LENGTH_SHORT).show();
                     }
-                    progressDialog.dismiss(); // Dismiss the loading indicator
+                    progressDialog.dismiss();
                 });
     }
 
@@ -252,7 +318,6 @@ public class RecipeUploadPage extends AppCompatActivity {
         finish();
     }
 
-    // Save the videoUri state when the activity is destroyed (or rotated)
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

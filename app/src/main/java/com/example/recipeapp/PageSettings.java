@@ -1,44 +1,46 @@
-package com.example.recipeapp; // Replace this with your actual package name
+package com.example.recipeapp;
 
-// Necessary imports for Android functionality
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth; // Import for Firebase Authentication (used for sign out)
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class PageSettings extends AppCompatActivity {
 
-    // Declare the TextViews and Button that will be used in the layout
-    private TextView inviteFriends, notificationPreference, privacyPolicy, communityGuidelines, termsOfService, contactUs, deleteAccount, aboutApp;
+    // Declare the TextViews, Button, and Back Arrow ImageView
+    private TextView inviteFriends, privacyPolicy, aboutApp;
     private Button signOutButton;
-
-
-
+    private ImageView backArrow; // Back arrow ImageView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_page1); // Ensure your layout file is named correctly
 
-        // Initialize TextViews by linking them to the corresponding IDs in XML
+        // Initialize TextViews, Button, and Back Arrow
         inviteFriends = findViewById(R.id.invite_friends);
-        privacyPolicy=findViewById(R.id.privacyPolicy);
-
-
-
-
-
+        privacyPolicy = findViewById(R.id.privacyPolicy);
         aboutApp = findViewById(R.id.aboutApp);
-
-        // Initialize the Sign Out button
         signOutButton = findViewById(R.id.signOutButton);
+        backArrow = findViewById(R.id.backArrow); // Initialize back arrow
+
+        // Set click listener for back arrow
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Finish the current activity to go back to the previous screen
+                finish();
+            }
+        });
 
         // Set click listener for Invite Friends TextView
         inviteFriends.setOnClickListener(new View.OnClickListener() {
@@ -50,8 +52,7 @@ public class PageSettings extends AppCompatActivity {
             }
         });
 
-
-
+        // Privacy policy click listener
         privacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,16 +68,7 @@ public class PageSettings extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
+        // Handle sign out button click
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,9 +117,5 @@ public class PageSettings extends AppCompatActivity {
                 dialog.show();
             }
         });
-
-
-
-
     }
 }

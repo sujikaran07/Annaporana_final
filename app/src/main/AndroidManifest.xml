@@ -7,9 +7,11 @@
     <!-- For Firebase Cloud Messaging and notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <!-- Required to check network connection state -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -28,18 +30,24 @@
             android:name=".PageProfileYourRecipes"
             android:exported="false" />
 
+        <activity
+            android:name=".PageSettings"
+            android:exported="true" />
 
+        <!-- Recipe Upload Page -->
         <activity
             android:name=".RecipeUploadPage"
             android:exported="false" />
+
+        <!-- PageCongrats Activity -->
         <activity
             android:name=".PageCongrats"
             android:exported="true" />
 
+        <!-- PageProfileActivity Activity -->
         <activity
             android:name=".PageProfileActivity"
             android:exported="false" />
-
 
         <!-- Firebase notification metadata -->
         <meta-data

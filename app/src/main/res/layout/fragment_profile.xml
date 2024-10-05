@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:background="#000000"
     android:padding="16dp">
+    tools:context=".ProfileFragment">
 
     <!-- Top bar with Settings Icon aligned to the right -->
     <RelativeLayout
