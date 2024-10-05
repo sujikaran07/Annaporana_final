@@ -3,7 +3,6 @@ package com.example.recipeapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ public class RegisterPage extends AppCompatActivity {
     private EditText usernameInput, emailInput, passwordInput;
     private CheckBox rememberMeCheckbox;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore firestore;
+    private DatabaseReference databaseReference; // Firebase Realtime Database reference
     private boolean isPasswordVisible = false;
     private static final String PREFS_NAME = "AppPrefs";
     private static final String KEY_INTRO_COMPLETED = "IntroCompleted";
@@ -36,9 +36,9 @@ public class RegisterPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
 
-        // Initialize Firebase Auth and Firestore
+        // Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
         // Initialize UI components
         usernameInput = findViewById(R.id.username_input);
@@ -46,7 +46,7 @@ public class RegisterPage extends AppCompatActivity {
         passwordInput = findViewById(R.id.password_input);
         rememberMeCheckbox = findViewById(R.id.remember_me_checkbox);
         ImageView eyeIcon = findViewById(R.id.eye_icon);
-        ImageView backArrow = findViewById(R.id.ic_back_arrow); // Back arrow
+        ImageView backArrow = findViewById(R.id.ic_back_arrow);
         Button signUpButton = findViewById(R.id.sign_up_button);
         TextView forgotPassword = findViewById(R.id.forgot_password_text);
         TextView loginText = findViewById(R.id.login_text);
@@ -68,7 +68,7 @@ public class RegisterPage extends AppCompatActivity {
         backArrow.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterPage.this, SplashPage.class);
             startActivity(intent);
-            finish(); // Finish the current activity to remove it from the back stack
+            finish();
         });
 
         // Forgot password action
@@ -78,7 +78,7 @@ public class RegisterPage extends AppCompatActivity {
         });
     }
 
-    // Method to register the user with Firebase Authentication and save username to Firestore
+    // Method to register the user with Firebase Authentication and save username to Firebase Realtime Database
     private void registerUser() {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
@@ -92,10 +92,10 @@ public class RegisterPage extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Registration success, save the username to Firestore
+                        // Registration success, save the username to Firebase Realtime Database
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            saveUserToFirestore(user.getUid(), username, email);
+                            saveUserToFirebase(user.getUid(), username, email);
                         }
 
                         // Mark intro as completed (since registration is done)
@@ -112,14 +112,14 @@ public class RegisterPage extends AppCompatActivity {
                 });
     }
 
-    // Method to save user info (username and email) to Firestore
-    private void saveUserToFirestore(String userId, String username, String email) {
+    // Method to save user info (username and email) to Firebase Realtime Database
+    private void saveUserToFirebase(String userId, String username, String email) {
         Map<String, Object> user = new HashMap<>();
         user.put("username", username);
         user.put("email", email);
 
-        // Save to Firestore under the 'users' collection using the user's UID
-        firestore.collection("users").document(userId).set(user)
+        // Save to Realtime Database under the 'users' node with the user's UID as key
+        databaseReference.child(userId).setValue(user)
                 .addOnSuccessListener(aVoid -> {
                     // Successfully saved user info
                     Toast.makeText(RegisterPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
