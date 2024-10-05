@@ -49,15 +49,7 @@
         android:textSize="18sp"
         android:padding="16dp" />
 
-    <TextView
-        android:id="@+id/notificationPreference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notification Preference"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp" />
+
 
     <TextView
         android:id="@+id/privacyPolicy"
@@ -69,15 +61,7 @@
         android:layout_marginTop="16dp"
         android:padding="16dp" />
 
-    <TextView
-        android:id="@+id/communityGuidelines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Community Guidelines"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp" />
+
 
     <TextView
         android:id="@+id/termsOfService"

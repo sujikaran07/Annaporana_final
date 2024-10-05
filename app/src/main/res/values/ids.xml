@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="button_recipe" type="id" />
+    <item name="notificationPreference" type="id" />
 </resources>
