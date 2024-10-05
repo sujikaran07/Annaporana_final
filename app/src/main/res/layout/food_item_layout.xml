@@ -1,23 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp"
-    android:background="#FFFFFF"
-    android:layout_margin="4dp">
+    android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/foodImage"
+    <!-- Video for the recipe -->
+    <VideoView
+        android:id="@+id/recipeVideo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="4dp" />
+        android:layout_gravity="center" />
 
+    <!-- Recipe name text -->
     <TextView
-        android:id="@+id/foodName"
+        android:id="@+id/recipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:padding="4dp" />
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:paddingTop="8dp" />
 </LinearLayout>

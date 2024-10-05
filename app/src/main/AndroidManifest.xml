@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recipeapp">
+
     <!-- Permissions -->
     <!-- For Firebase Cloud Messaging and notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -18,33 +19,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeApp"
         tools:targetApi="31">
-        <activity
-            android:name=".PageSettings"
-            android:exported="true" />
+
         <!-- PageProfileYourRecipes Activity -->
         <activity
             android:name=".PageProfileYourRecipes"
             android:exported="false" />
 
-        <activity android:name=".InviteFriendsActivity"
-            android:exported="true"
-            tools:ignore="Instantiatable" />
-
-        <activity
-            android:name=".FoodItemLayout"
-            android:exported="false" />
         <activity
             android:name=".RecipeUploadPage"
             android:exported="false" />
         <activity
             android:name=".PageCongrats"
             android:exported="true" />
+
         <activity
             android:name=".PageProfileActivity"
-            android:exported="false" /> <!-- Firebase notification metadata -->
+            android:exported="false" />
+
+
+        <!-- Firebase notification metadata -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/ic_launcher" /> <!-- Other public pages -->
+            android:resource="@mipmap/ic_launcher" />
+
+        <!-- Other public pages -->
         <activity
             android:name=".ForgotPasswordPage"
             android:exported="true" />
@@ -68,20 +66,24 @@
             android:exported="true" />
         <activity
             android:name=".NotificationPage"
-            android:exported="true" /> <!-- Main activity: GetStartPage -->
+            android:exported="true" />
+
+        <!-- Main activity: GetStartPage -->
         <activity
             android:name=".GetStartPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- HomePage Activity with windowSoftInputMode to prevent BottomNavigationView from rising -->
+        </activity>
+
+        <!-- HomePage Activity with windowSoftInputMode to prevent BottomNavigationView from rising -->
         <activity
             android:name=".HomePage"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan" /> <!-- This keeps BottomNavigationView fixed even when the keyboard opens -->
+
     </application>
 
 </manifest>
