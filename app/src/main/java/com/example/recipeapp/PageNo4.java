@@ -39,6 +39,7 @@ public class PageNo4 extends AppCompatActivity {
     // Navigate to SplashPage
     private void goToSplashPage() {
         Intent intent = new Intent(PageNo4.this, SplashPage.class);
+        intent.putExtra("SkipIntro", true);
         startActivity(intent);
         finish();
     }

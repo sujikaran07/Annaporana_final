@@ -27,8 +27,9 @@
         <activity
             android:name=".RecipeUploadPage"
             android:exported="false" />
-
-
+        <activity
+            android:name=".PageCongrats"
+            android:exported="false" />
 
         <activity
             android:name=".PageProfileActivity"

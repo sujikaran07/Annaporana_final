@@ -1,10 +1,8 @@
 package com.example.recipeapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,8 +20,6 @@ public class LoginPage extends AppCompatActivity {
     private EditText emailInput, passwordInput;
     private CheckBox rememberMeCheckbox;
     private FirebaseAuth mAuth;
-    private static final String PREFS_NAME = "AppPrefs";
-    private static final String KEY_INTRO_COMPLETED = "IntroCompleted";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +37,7 @@ public class LoginPage extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_button);
         TextView forgotPassword = findViewById(R.id.forgot_password_text);
         TextView signUpText = findViewById(R.id.sign_up_text);
+        ImageView backArrow = findViewById(R.id.ic_back_arrow);  // Back arrow
 
         // Password toggle visibility
         eyeIcon.setOnClickListener(v -> togglePasswordVisibility());
@@ -57,6 +54,13 @@ public class LoginPage extends AppCompatActivity {
         // Sign-up link to go to RegisterPage
         signUpText.setOnClickListener(v -> {
             Intent intent = new Intent(LoginPage.this, RegisterPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // Back arrow action to go to SplashPage
+        backArrow.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginPage.this, SplashPage.class);
             startActivity(intent);
             finish();
         });
@@ -77,9 +81,6 @@ public class LoginPage extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            // Mark intro as completed since the user is now logged in
-                            markIntroCompleted();
-
                             // Navigate to home page
                             Intent intent = new Intent(LoginPage.this, HomePage.class);
                             startActivity(intent);
@@ -98,18 +99,18 @@ public class LoginPage extends AppCompatActivity {
         String password = passwordInput.getText().toString().trim();
 
         // Email validation
-        if (TextUtils.isEmpty(email)) {
+        if (email.isEmpty()) {
             emailInput.setError("Email is required");
             return false;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailInput.setError("Enter a valid email address");
             return false;
         }
 
         // Password validation
-        if (TextUtils.isEmpty(password)) {
+        if (password.isEmpty()) {
             passwordInput.setError("Password is required");
             return false;
         }
@@ -125,13 +126,5 @@ public class LoginPage extends AppCompatActivity {
             passwordInput.setInputType(129);  // Hide password
         }
         passwordInput.setSelection(passwordInput.length());  // Move cursor to end
-    }
-
-    // Mark the intro as completed in SharedPreferences after successful login
-    private void markIntroCompleted() {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(KEY_INTRO_COMPLETED, true);
-        editor.apply();
     }
 }

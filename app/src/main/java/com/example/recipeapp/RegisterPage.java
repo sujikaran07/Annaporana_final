@@ -46,6 +46,7 @@ public class RegisterPage extends AppCompatActivity {
         passwordInput = findViewById(R.id.password_input);
         rememberMeCheckbox = findViewById(R.id.remember_me_checkbox);
         ImageView eyeIcon = findViewById(R.id.eye_icon);
+        ImageView backArrow = findViewById(R.id.ic_back_arrow); // Back arrow
         Button signUpButton = findViewById(R.id.sign_up_button);
         TextView forgotPassword = findViewById(R.id.forgot_password_text);
         TextView loginText = findViewById(R.id.login_text);
@@ -61,6 +62,19 @@ public class RegisterPage extends AppCompatActivity {
             Intent intent = new Intent(RegisterPage.this, LoginPage.class);
             startActivity(intent);
             finish();
+        });
+
+        // Back arrow action to go to SplashPage
+        backArrow.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterPage.this, SplashPage.class);
+            startActivity(intent);
+            finish(); // Finish the current activity to remove it from the back stack
+        });
+
+        // Forgot password action
+        forgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterPage.this, ForgotPasswordPage.class);
+            startActivity(intent);
         });
     }
 

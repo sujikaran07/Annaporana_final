@@ -47,8 +47,14 @@ dependencies {
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth:21.0.1")
 
-    // Firebase Firestore (needed to store usernames and resolve them to emails)
+    // Firebase Firestore (optional if using Firestore for other purposes)
     implementation("com.google.firebase:firebase-firestore:23.0.3")
+
+    // Add Firebase Realtime Database
+    implementation("com.google.firebase:firebase-database:19.7.0")
+
+    // Add Firebase Storage (for video uploads)
+    implementation("com.google.firebase:firebase-storage:20.0.1")
 
     // Testing libraries
     testImplementation("junit:junit:4.13.2")
