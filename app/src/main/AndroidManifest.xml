@@ -25,6 +25,9 @@
             android:name=".PageProfileYourRecipes"
             android:exported="false" />
         <activity
+            android:name=".FoodItemLayout"
+            android:exported="false" />
+        <activity
             android:name=".RecipeUploadPage"
             android:exported="false" />
         <activity
