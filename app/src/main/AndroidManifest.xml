@@ -7,6 +7,9 @@
     <!-- For Firebase Cloud Messaging and notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -24,6 +27,7 @@
         <activity
             android:name=".PageProfileYourRecipes"
             android:exported="false" />
+
 
         <activity
             android:name=".RecipeUploadPage"
