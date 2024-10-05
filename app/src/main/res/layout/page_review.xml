@@ -9,10 +9,67 @@
     android:padding="16dp"
     tools:context=".Page_Review">
 
-    <!-- Cancel and Submit buttons -->
+
+
+    <!-- Tip for food name -->
+    <TextView
+        android:id="@+id/tip_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share your tip for the Food Name"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="230dp" />
+
+    <!-- Image placed between text and rating stars -->
+    <ImageView
+        android:id="@+id/image_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/review"
+        />
+
+    <!-- Star rating -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_rate"
+            app:tint="@color/white" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_rate"
+            app:tint="@color/white" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_rate"
+            app:tint="@color/white" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_rate"
+            app:tint="@color/white" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_rate"
+            app:tint="@color/white" />
+    </LinearLayout>
+    <!-- Cancel and Submit buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:weightSum="2">
@@ -25,6 +82,7 @@
             android:gravity="start"
             android:text="Cancel"
             android:textColor="#A52A2A"
+            android:layout_marginTop="30dp"
             android:textSize="20sp" />
 
         <TextView
@@ -35,144 +93,10 @@
             android:gravity="end"
             android:text="Submit"
             android:textColor="#FFFFFF"
+            android:layout_marginTop="30dp"
             android:textSize="20sp" />
     </LinearLayout>
 
-    <!-- Tip for food name -->
-    <TextView
-        android:id="@+id/tip_Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share your tip for the Food Name"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp" />
-
-    <!-- Star rating -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="24dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_rate"
-            app:tint="#FFFFFF" />
-    </LinearLayout>
-
-    <!-- Discretion text input -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Discreption"
-        android:textSize="18dp"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="50dp"/>
-
-    <EditText
-        android:id="@+id/discretion"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/edit_text_background"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="top"
-        android:text="Add photo"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp" />
 
 
-
-    <LinearLayout
-        android:layout_width="380dp"
-        android:layout_height="300dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-        android:weightSum="2"
-        android:gravity="center">
-
-
-        <!-- Upload Photo Button -->
-
-
-        <LinearLayout
-            android:layout_width="30dp"
-            android:layout_height="230dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="4dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/baseline_photo_camera_24"
-                app:tint="#FFFFFF" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:text="upload photo"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
-
-        <!-- Upload Video Button -->
-        <LinearLayout
-            android:layout_width="30dp"
-            android:layout_height="230dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-
-            android:background="@drawable/edit_text_background"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="4dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/baseline_video_camera_front_24"
-                app:tint="#FFFFFF" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:text="upload video"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>

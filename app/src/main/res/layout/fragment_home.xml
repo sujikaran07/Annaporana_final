@@ -16,7 +16,7 @@
             android:id="@+id/greetingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello Ram!"
+            android:text="Hello Buddy !"
             android:textSize="24sp"
             android:layout_gravity="center"
             android:textColor="#FFFFFF"
