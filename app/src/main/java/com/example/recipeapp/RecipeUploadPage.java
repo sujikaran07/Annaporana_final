@@ -6,15 +6,16 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.VideoView;
+import android.text.TextWatcher;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,7 +78,7 @@ public class RecipeUploadPage extends AppCompatActivity {
 
         // Add input validation for "Serves", "Cook time", and "Nutrition"
         servesEditText.addTextChangedListener(new AutoFillWatcher(servesEditText, " people"));
-        cookTimeEditText.addTextChangedListener(new AutoFillWatcher(cookTimeEditText, " mins"));  // Auto-fill with "mins"
+        cookTimeEditText.addTextChangedListener(new AutoFillWatcher(cookTimeEditText, " mins"));
         nutritionEditText.addTextChangedListener(new AutoFillWatcher(nutritionEditText, " cal"));
 
         // Initialize progress dialog for showing loading state
@@ -113,7 +114,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         });
     }
 
-    // Method to handle setting video into the VideoView and resizing it to fit
+    // Method to handle setting video into the VideoView and setting play/pause behavior
     private void setVideoToView(Uri videoUri) {
         if (videoUri != null) {
             videoView.setVideoURI(videoUri);  // Set the video URI to the VideoView
@@ -123,9 +124,18 @@ public class RecipeUploadPage extends AppCompatActivity {
             uploadIcon.setVisibility(ImageView.GONE);
             uploadVideoText.setVisibility(TextView.GONE);
 
-            // Prepare the video but don't automatically play it
+            // Handle video prepared (this is necessary to have video ready for play/pause)
             videoView.setOnPreparedListener(mp -> {
-                videoView.start();
+                // Do not automatically play the video here
+            });
+
+            // Add click listener to toggle between play and pause
+            videoView.setOnClickListener(v -> {
+                if (videoView.isPlaying()) {
+                    videoView.pause();  // Pause the video if it is currently playing
+                } else {
+                    videoView.start();  // Play the video if it is currently paused
+                }
             });
 
             // Handle video errors
