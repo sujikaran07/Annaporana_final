@@ -8,286 +8,355 @@
     android:padding="16dp"
     tools:context=".RecipeUploadPage">
 
-    <!-- Button Container for Cancel, and Upload -->
+    <!-- Button Container for Cancel (left) and Upload (right) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:gravity="center_horizontal">
 
-        <!-- Cancel Button -->
+        <!-- Cancel Button (left) -->
         <ImageButton
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_close_24"
             android:contentDescription="Cancel"
-            android:layout_marginLeft="0dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_margin="16dp" />
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center" />
 
-        <!-- Upload Button -->
+        <!-- Upload Button (right) -->
         <Button
             android:id="@+id/uploadButton"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:text="Upload"
             android:padding="2dp"
-            android:layout_marginStart="235dp"
             android:layout_gravity="center"
             style="@style/CustomButtonStyle5"
             android:textSize="14sp"
+            android:layout_marginStart="230dp"
             android:textColor="@color/black"
             android:background="@drawable/btn_radius" />
     </LinearLayout>
 
-    <!-- FrameLayout to overlay VideoView and TextView -->
+    <!-- FrameLayout for VideoView (Outside Scrollable Section) -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/container_border"
-    android:padding="8dp">
+        android:padding="8dp">
 
-    <!-- VideoView for uploading video -->
-    <VideoView
-        android:id="@+id/videoView"
+        <!-- VideoView for uploading video -->
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:scaleType="fitXY" />
+
+        <!-- Text and icon overlay for video upload -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center|bottom">
+
+            <!-- Upload video icon -->
+            <ImageView
+                android:id="@+id/uploadIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_upload_24"
+                android:contentDescription="Upload Icon"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Upload button overlay text -->
+            <TextView
+                android:id="@+id/uploadVideoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Recipe Video"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Scrollable Content for Image Upload and Other Fields -->
+    <ScrollView
+        android:id="@+id/scrollableContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        android:scaleType="fitXY" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp">
 
-    <!-- Text and icon overlay for video upload -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center|bottom">
-
-        <!-- Upload video icon -->
-        <ImageView
-            android:id="@+id/uploadIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/baseline_upload_24"
-        android:contentDescription="Upload Icon"
-        android:layout_marginEnd="8dp" />
-
-        <!-- Upload button overlay text -->
-        <TextView
-            android:id="@+id/uploadVideoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Recipe Video"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-    </LinearLayout>
-</FrameLayout>
-
-    <!-- Scrollable Content Below VideoView -->
-<ScrollView
-android:id="@+id/scrollableContent"
-android:layout_width="match_parent"
-android:layout_height="0dp"
-android:layout_weight="1"
-android:layout_marginTop="16dp">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <!-- Title Input Field -->
-    <EditText
-        android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title : My best recipe ever"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textSize="16sp"
-        android:background="@drawable/edit_text_background"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
-
-    <!-- Description Input Field -->
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Share a little more about this dish..."
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textSize="16sp"
-        android:background="@drawable/edit_text_background"
-        android:padding="10dp"
-        android:inputType="textMultiLine"
-        android:minHeight="100dp"
-        android:gravity="top"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
-
-    <!-- Horizontal layout for Serves -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="10dp">
-
-        <!-- Label for Serves -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Serves"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_weight="1" />
-
-        <!-- Input for Serves -->
-        <EditText
-            android:id="@+id/servesEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="2 people"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="16sp"
-            android:background="@drawable/edit_text_background"
-            android:padding="10dp"
-            android:minWidth="150dp" />
-    </LinearLayout>
-
-    <!-- Horizontal layout for Cook time -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="10dp">
-
-        <!-- Label for Cook time -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cook time"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_weight="1" />
-
-        <!-- Input for Cook time -->
-        <EditText
-            android:id="@+id/cookTimeEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint=" 30 mins"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="16sp"
-            android:background="@drawable/edit_text_background"
-            android:padding="10dp"
-            android:minWidth="150dp" />
-    </LinearLayout>
-
-    <!-- Horizontal layout for Nutrition -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="10dp">
-
-        <!-- Label for Nutrition -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Energy"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_weight="1" />
-
-        <!-- Input for Nutrition -->
-        <EditText
-            android:id="@+id/nutritionEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="750 cal"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="16sp"
-            android:background="@drawable/edit_text_background"
-            android:padding="10dp"
-            android:minWidth="150dp" />
-    </LinearLayout>
-
-    <!-- Ingredients input field -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp">
-
-        <!-- Label for Ingredients -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ingredients"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
-        <!-- Input for Ingredients -->
-        <EditText
-            android:id="@+id/ingredientsEditText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="List all ingredients"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_background"
-            android:padding="10dp"
-            android:minHeight="150dp"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <!-- Methods input field -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            <!-- Image Upload Section -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/container_border"
+                android:padding="8dp">
 
-        <!-- Label for Methods -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Methods"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+                <!-- ImageView for uploading image -->
+                <ImageView
+                    android:id="@+id/recipeImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_placeholder_image"
+                    android:contentDescription="Uploaded Image" />
 
-        <!-- Input for Methods -->
-        <EditText
-            android:id="@+id/methodsEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Describe the cooking methods"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
-            android:background="@drawable/edit_text_background"
-            android:padding="10dp"
-            android:minHeight="150dp"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
-    </LinearLayout>
+                <!-- Text and icon overlay for image upload -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_gravity="center|bottom">
+
+                    <!-- Upload image icon -->
+                    <ImageView
+                        android:id="@+id/uploadImageIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/baseline_photo_camera_24"
+                        android:contentDescription="Upload Icon"
+                        android:layout_marginEnd="8dp" />
+
+                    <!-- Upload image overlay text -->
+                    <TextView
+                        android:id="@+id/uploadImageText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload Recipe Image"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Title Input Field -->
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Recipe Name : Dosa"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                android:layout_marginTop="10dp" />
+
+            <!-- Description Input Field -->
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Share a little more about this dish..."
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:minHeight="100dp"
+                android:gravity="top"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Dropdown Menu for Food Category (Right-aligned like Serves) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <!-- Label for Food Category -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Food Category"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <!-- Spinner for Food Category -->
+                <Spinner
+                    android:id="@+id/foodCategorySpinner"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/food_category_array"
+                    android:padding="10dp"
+                    android:background="@drawable/spinner_background" />
+            </LinearLayout>
+
+            <!-- Horizontal layout for Serves -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <!-- Label for Serves -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Serves"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <!-- Input for Serves -->
+                <EditText
+                    android:id="@+id/servesEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="2 people"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="16sp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="10dp"
+                    android:minWidth="150dp" />
+            </LinearLayout>
+
+            <!-- Horizontal layout for Cook time -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <!-- Label for Cook time -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cook time"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <!-- Input for Cook time -->
+                <EditText
+                    android:id="@+id/cookTimeEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="30 mins"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="16sp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="10dp"
+                    android:minWidth="150dp" />
+            </LinearLayout>
+
+            <!-- Horizontal layout for Nutrition -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <!-- Label for Nutrition -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Energy"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <!-- Input for Nutrition -->
+                <EditText
+                    android:id="@+id/nutritionEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="750 cal"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="16sp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="10dp"
+                    android:minWidth="150dp" />
+            </LinearLayout>
+
+            <!-- Ingredients input field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp">
+
+                <!-- Label for Ingredients -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ingredients"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <!-- Input for Ingredients -->
+                <EditText
+                    android:id="@+id/ingredientsEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="List all ingredients"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="10dp"
+                    android:minHeight="150dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+
+            <!-- Methods input field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Label for Methods -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Methods"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <!-- Input for Methods -->
+                <EditText
+                    android:id="@+id/methodsEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Describe the cooking methods"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="10dp"
+                    android:minHeight="150dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
-</ScrollView>
-
-    </LinearLayout>

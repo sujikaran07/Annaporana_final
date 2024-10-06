@@ -1,160 +1,252 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:padding="16dp"
     tools:context=".HomeFragment">
 
+    <!-- Profile and Greeting Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical">
 
-        <!-- Greeting TextView -->
-        <TextView
-            android:id="@+id/greetingText"
+
+        <!-- User Greeting and Subtext -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="0dp">
+
+            <!-- User Greeting -->
+            <TextView
+                android:id="@+id/userGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello, Buddy!"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:textColor="@color/text_color"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Subtext -->
+            <TextView
+                android:id="@+id/subText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cook at home, enjoy your cozy space."
+                android:textSize="14sp"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_profile"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background2" />
+
+
+    </LinearLayout>
+
+    <!-- Search Bar Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="45dp"
+        android:padding="8dp">
+
+        <!-- Search Icon (acts as the search button) -->
+        <ImageView
+            android:id="@+id/search_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_search_24"
+            android:layout_marginStart="5dp"
+            android:contentDescription="Search Icon" />
+
+        <!-- Search Input Field -->
+        <EditText
+            android:id="@+id/search_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search any recipe"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:background="@android:color/transparent"
+            android:paddingStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Category Icons -->
+    <LinearLayout
+        android:id="@+id/categoryButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:orientation="horizontal"
+        android:gravity="start">
+
+        <!-- Popular Category -->
+        <LinearLayout
+            android:id="@+id/popularCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello Buddy !"
-            android:textSize="24sp"
-            android:layout_gravity="center"
-            android:textColor="#FFFFFF"
-            android:padding="16dp" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginEnd="21dp">
 
-        <!-- Category Buttons -->
-        <GridLayout
-            android:id="@+id/categoryGrid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="3"
-            android:padding="16dp"
-            android:layout_gravity="center">
+            <!-- Circular Background -->
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/baseline_whatshot_24" />
 
-            <!-- Popular Button -->
-            <Button
-                android:id="@+id/btnPopular"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:textSize="13sp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
                 android:text="Popular"
-                android:textColor="#000000"
-                android:layout_margin="8dp" />
+                android:textSize="12sp"
+                android:textColor="@color/nav_item_selector" />
+        </LinearLayout>
 
-            <!-- Rice Button -->
-            <Button
-                android:id="@+id/btnRice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                android:textSize="13sp"
-                style="@style/CustomButtonStyle2"
-                android:text="Rice"
-                android:textColor="#000000"
-                android:layout_margin="8dp" />
-
-            <!-- Curries Button -->
-            <Button
-                android:id="@+id/btnCurries"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:textSize="13sp"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:text="Curries"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Gravy Button -->
-            <Button
-                android:id="@+id/btnGravy"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:text="Gravy"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Side Dish Button -->
-            <Button
-                android:id="@+id/btnSideDish"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:text="Fries"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Dessert Button -->
-            <Button
-                android:id="@+id/btnDessert"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:text="Dessert"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Festival Button -->
-            <Button
-                android:id="@+id/btnFestival"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                android:textSize="13sp"
-                style="@style/CustomButtonStyle2"
-                android:text="Festival"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Juice Button -->
-            <Button
-                android:id="@+id/btnJuice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:text="Juice"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Soup Button -->
-            <Button
-                android:id="@+id/btnSoup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:background="@drawable/btn_9"
-                style="@style/CustomButtonStyle2"
-                android:text="Soup"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-        </GridLayout>
-
-        <!-- Food Items RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/foodRecyclerView"
-            android:layout_width="match_parent"
+        <!-- Western Category -->
+        <LinearLayout
+            android:id="@+id/westernCategory"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:nestedScrollingEnabled="false" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="21dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/baseline_breakfast_dining_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Tiffin"
+                android:textSize="12sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Drinks Category -->
+        <LinearLayout
+            android:id="@+id/drinksCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="21dp"> <!-- Add margins between icons -->
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/baseline_set_meal_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Meals"
+                android:textSize="12sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Local Category -->
+        <LinearLayout
+            android:id="@+id/localCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="21dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/baseline_local_pizza_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Snacks"
+                android:textSize="12sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Dessert Category -->
+        <LinearLayout
+            android:id="@+id/dessertCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="0dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/baseline_local_drink_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Drinks"
+                android:textSize="12sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </LinearLayout>
-</ScrollView>
+
+
+    <!-- Popular Recipes Title -->
+    <TextView
+        android:id="@+id/popularTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popular Recipes"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="45dp"
+        android:textColor="@android:color/white" />
+
+    <!-- Scrollable Popular Recipes -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_recipe" />
+</LinearLayout>

@@ -37,7 +37,7 @@
         <!-- Recipe Upload Page -->
         <activity
             android:name=".RecipeUploadPage"
-            android:exported="false" />
+            android:exported="true" />
 
         <!-- PageCongrats Activity -->
         <activity

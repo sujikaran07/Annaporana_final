@@ -12,6 +12,26 @@
     <string name="reset_password">Reset Password</string>
     <string name="welcome_message">Welcome to Recipe App!</string>
     <string name="register_title">Create Your Account</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- New Strings for Recipe Upload Page -->
+    <string name="title_hint">Recipe Name : Dosa</string>
+    <string name="description_hint">Share a little more about this dish...</string>
+    <string name="serves_label">Serves</string>
+    <string name="cook_time_label">Cook time</string>
+    <string name="nutrition_label">Energy</string>
+    <string name="ingredients_label">Ingredients</string>
+    <string name="ingredients_hint">List all ingredients</string>
+    <string name="methods_label">Methods</string>
+    <string name="methods_hint">Describe the cooking methods</string>
+    <string name="food_category_label">Food Category</string>
+
+    <!-- Food Category Array for Spinner -->
+    <string-array name="food_category_array">
+        <item>Tiffin</item>
+        <item>Meals</item>
+        <item>Snacks</item>
+        <item>Drinks</item>
+    </string-array>
 </resources>

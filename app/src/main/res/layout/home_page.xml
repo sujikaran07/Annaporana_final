@@ -2,36 +2,28 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage"
     android:background="@color/black">
 
-    <!-- RelativeLayout to hold the fragments and BottomNavigationView -->
-    <RelativeLayout
+    <!-- FrameLayout for displaying fragments -->
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <!-- FrameLayout to hold dynamic content (fragments) -->
-        <FrameLayout
-            android:id="@+id/frame_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/bottomNavigationView" /> <!-- Ensure it's above the navigation bar -->
-
-        <!-- BottomNavigationView with 5 icons, no labels, and 40dp icon size -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#1F1D1D"
-            app:menu="@menu/bottom_menu"
-            app:itemIconTint="@color/white"
-            app:itemIconSize="40dp"
-            app:labelVisibilityMode="unlabeled" />
-
-    </RelativeLayout>
+    <!-- Bottom Navigation View -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="15dp"
+        android:background="@drawable/rounded_bottom_nav_background"
+        app:itemIconTint="@color/white"
+        app:itemIconSize="40dp"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/bottom_menu"
+        app:labelVisibilityMode="unlabeled" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

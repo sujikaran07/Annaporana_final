@@ -10,13 +10,14 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment; // <-- Import this class
+import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.text.Editable;
@@ -43,9 +44,10 @@ import java.util.UUID;
 public class RecipeUploadPage extends AppCompatActivity {
 
     private static final int PICK_VIDEO_REQUEST = 1;
+    private static final int PICK_IMAGE_REQUEST = 2;  // Added for image
     private static final int PERMISSION_REQUEST_CODE = 100;
 
-    private Uri videoUri;
+    private Uri videoUri, imageUri;  // Added imageUri for image
 
     // Firebase instances
     private FirebaseStorage storage;
@@ -55,11 +57,12 @@ public class RecipeUploadPage extends AppCompatActivity {
 
     // UI elements
     private VideoView videoView;
-    private ImageView uploadIcon;
-    private TextView uploadVideoText;
+    private ImageView uploadIcon, recipeImageView;  // Added recipeImageView for image
+    private TextView uploadVideoText, uploadImageText;  // Added uploadImageText for image
     private EditText titleEditText, descriptionEditText, servesEditText, cookTimeEditText, nutritionEditText, ingredientsEditText, methodsEditText;
     private Button uploadButton;
     private ImageButton closeButton;
+    private Spinner foodCategorySpinner;  // Added spinner for food category
     private ProgressDialog progressDialog;
 
     @Override
@@ -76,6 +79,8 @@ public class RecipeUploadPage extends AppCompatActivity {
         // Initialize UI elements
         videoView = findViewById(R.id.videoView);
         uploadIcon = findViewById(R.id.uploadIcon);
+        recipeImageView = findViewById(R.id.recipeImageView);  // ImageView for the recipe image
+        uploadImageText = findViewById(R.id.uploadImageText);  // Text for image upload
         uploadVideoText = findViewById(R.id.uploadVideoText);
         titleEditText = findViewById(R.id.titleEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
@@ -86,6 +91,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         methodsEditText = findViewById(R.id.methodsEditText);
         uploadButton = findViewById(R.id.uploadButton);
         closeButton = findViewById(R.id.cancelButton);
+        foodCategorySpinner = findViewById(R.id.foodCategorySpinner);  // Spinner for food category
 
         // Add input validation for "Serves", "Cook time", and "Nutrition"
         servesEditText.addTextChangedListener(new AutoFillWatcher(servesEditText, " people"));
@@ -117,6 +123,9 @@ public class RecipeUploadPage extends AppCompatActivity {
             }
         });
 
+        // Handle image upload click
+        uploadImageText.setOnClickListener(v -> openImagePicker());
+
         // Handle recipe submission
         uploadButton.setOnClickListener(v -> {
             if (validateFields()) {
@@ -130,13 +139,18 @@ public class RecipeUploadPage extends AppCompatActivity {
         });
     }
 
+    // Open image picker to select a recipe image
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
     // Check if permission is granted
     private boolean checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // For Android 11 (API level 30) or higher
             return Environment.isExternalStorageManager();
         } else {
-            // For Android 6.0 to Android 10
             return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
     }
@@ -144,7 +158,6 @@ public class RecipeUploadPage extends AppCompatActivity {
     // Request for permission
     private void requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // For Android 11 (API level 30) or higher
             try {
                 Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
                 startActivityForResult(intent, PERMISSION_REQUEST_CODE);
@@ -154,7 +167,6 @@ public class RecipeUploadPage extends AppCompatActivity {
                 startActivityForResult(intent, PERMISSION_REQUEST_CODE);
             }
         } else {
-            // For Android 6.0 to Android 10
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
     }
@@ -164,10 +176,8 @@ public class RecipeUploadPage extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
                 openVideoPicker();
             } else {
-                // Permission denied
                 Toast.makeText(this, "Storage permission denied. Cannot upload video.", Toast.LENGTH_SHORT).show();
             }
         }
@@ -187,7 +197,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    // Method to handle setting video into the VideoView and setting play/pause behavior
+    // Set the selected video to the VideoView
     private void setVideoToView(Uri videoUri) {
         if (videoUri != null) {
             videoView.setVideoURI(videoUri);
@@ -207,8 +217,15 @@ public class RecipeUploadPage extends AppCompatActivity {
                 Toast.makeText(RecipeUploadPage.this, "Error playing video", Toast.LENGTH_SHORT).show();
                 return true;
             });
+        }
+    }
+
+    // Set the selected image to the ImageView
+    private void setImageToView(Uri imageUri) {
+        if (imageUri != null) {
+            recipeImageView.setImageURI(imageUri);
         } else {
-            Toast.makeText(this, "No video selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -228,64 +245,82 @@ public class RecipeUploadPage extends AppCompatActivity {
             Toast.makeText(this, "Please upload a video", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (imageUri == null) {
+            Toast.makeText(this, "Please upload an image", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
-    // Handle the video selection result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             videoUri = data.getData();
+            setVideoToView(videoUri);
+        } else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
 
-            Cursor returnCursor = getContentResolver().query(videoUri, null, null, null, null);
+            // Check the file size of the selected image
+            Cursor returnCursor = getContentResolver().query(imageUri, null, null, null, null);
             if (returnCursor != null) {
                 int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
                 returnCursor.moveToFirst();
                 long fileSize = returnCursor.getLong(sizeIndex);
                 returnCursor.close();
 
-                if (fileSize < 500 * 1024 * 1024) {
-                    setVideoToView(videoUri);
+                // Check if the image size is less than 100MB (100 * 1024 * 1024 = 104857600 bytes)
+                if (fileSize < 100 * 1024 * 1024) {
+                    setImageToView(imageUri);
                 } else {
-                    Toast.makeText(this, "Video must be less than 500MB", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Image must be less than 100MB", Toast.LENGTH_SHORT).show();
+                    imageUri = null;  // Reset the imageUri if the size is too large
                 }
             }
         } else {
-            Toast.makeText(this, "Failed to select video", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed to select media", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Upload data to Firebase (both the video and recipe details)
+    // Upload data to Firebase (video, image, and recipe details)
     private void uploadDataToFirebase() {
         FirebaseUser currentUser = auth.getCurrentUser();
-
         if (currentUser != null) {
-            if (videoUri != null) {
-                StorageReference videoRef = storageReference.child("videos/" + UUID.randomUUID().toString());
+            if (videoUri != null && imageUri != null) {
+                String userId = currentUser.getUid();
 
+                // Upload video to Firebase
+                StorageReference videoRef = storageReference.child("videos/" + UUID.randomUUID().toString());
                 videoRef.putFile(videoUri)
-                        .addOnSuccessListener(taskSnapshot -> videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                            String userId = currentUser.getUid();
-                            saveRecipeDetails(uri.toString(), userId);
+                        .addOnSuccessListener(taskSnapshot -> videoRef.getDownloadUrl().addOnSuccessListener(videoUrl -> {
+                            // Upload image to Firebase
+                            StorageReference imageRef = storageReference.child("images/" + UUID.randomUUID().toString());
+                            imageRef.putFile(imageUri)
+                                    .addOnSuccessListener(imageTaskSnapshot -> imageRef.getDownloadUrl().addOnSuccessListener(imageUrl -> {
+                                        // Save recipe details
+                                        saveRecipeDetails(videoUrl.toString(), imageUrl.toString(), userId);
+                                    }))
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(RecipeUploadPage.this, "Image upload failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                        progressDialog.dismiss();
+                                    });
                         }))
                         .addOnFailureListener(e -> {
                             Toast.makeText(RecipeUploadPage.this, "Video upload failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            Log.e("UploadError", e.getMessage());
-                            progressDialog.dismiss(); // Dismiss the loading indicator if the upload fails
+                            progressDialog.dismiss();
                         });
             }
         } else {
-            // If the user is not authenticated, show an error message
             Toast.makeText(this, "User is not authenticated. Please log in first.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
     }
 
     // Save recipe details to Firebase Realtime Database
-    private void saveRecipeDetails(String videoUrl, String userId) {
+    private void saveRecipeDetails(String videoUrl, String imageUrl, String userId) {
         String recipeId = UUID.randomUUID().toString();
         String cookTime = cookTimeEditText.getText().toString().trim();
+        String selectedCategory = foodCategorySpinner.getSelectedItem().toString();  // Get selected category
 
         Map<String, Object> recipeData = new HashMap<>();
         recipeData.put("recipeId", recipeId);
@@ -298,6 +333,8 @@ public class RecipeUploadPage extends AppCompatActivity {
         recipeData.put("ingredients", ingredientsEditText.getText().toString().trim());
         recipeData.put("methods", methodsEditText.getText().toString().trim());
         recipeData.put("videoUrl", videoUrl);
+        recipeData.put("imageUrl", imageUrl);  // Added image URL
+        recipeData.put("category", selectedCategory);  // Added food category
 
         databaseReference.child(userId).child("recipes").child(recipeId).setValue(recipeData)
                 .addOnCompleteListener(task -> {
@@ -337,12 +374,10 @@ public class RecipeUploadPage extends AppCompatActivity {
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
         @Override
         public void afterTextChanged(Editable s) {

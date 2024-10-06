@@ -39,9 +39,7 @@ public class HomePage extends AppCompatActivity {
             if (id == R.id.home) {
                 Log.d(TAG, "Home button clicked");
                 selectedFragment = new HomeFragment();
-            } else if (id == R.id.search) {
-                Log.d(TAG, "Search button clicked");
-                selectedFragment = new SearchFragment();
+
             } else if (id == R.id.add) {
                 Log.d(TAG, "Add button clicked");
                 selectedFragment = new AddFragment();
