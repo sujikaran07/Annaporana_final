@@ -158,23 +158,24 @@
                 android:layout_marginTop="10dp" />
 
             <!-- Description Input Field -->
+
+            <!-- Dropdown Menu for Food Category (Right-aligned like Serves) -->
             <EditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Share a little more about this dish..."
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_text_background"
-                android:padding="10dp"
+                android:gravity="top"
+                android:hint="Share a little more about this dish..."
                 android:inputType="textMultiLine"
                 android:minHeight="100dp"
-                android:gravity="top"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp" />
+                android:padding="10dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />
 
-            <!-- Dropdown Menu for Food Category (Right-aligned like Serves) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -285,7 +286,7 @@
                     android:id="@+id/nutritionEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="750 cal"
+                    android:hint="750 kcal"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     android:textSize="16sp"

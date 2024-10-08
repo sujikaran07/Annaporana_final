@@ -2,7 +2,6 @@ package com.example.recipeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -10,27 +9,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginPage extends AppCompatActivity {
 
-    private EditText emailInput, passwordInput;
+    private EditText emailOrUsernameInput, passwordInput;
     private CheckBox rememberMeCheckbox;
     private FirebaseAuth mAuth;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth and Database reference
         mAuth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase.getInstance().getReference("users");  // Reference to "users" node in Firebase Realtime Database
 
         // Initialize UI components
-        emailInput = findViewById(R.id.input_field);
+        emailOrUsernameInput = findViewById(R.id.input_field);
         passwordInput = findViewById(R.id.password_input);
         rememberMeCheckbox = findViewById(R.id.remember_me_checkbox);
         ImageView eyeIcon = findViewById(R.id.eye_icon);
@@ -68,14 +73,25 @@ public class LoginPage extends AppCompatActivity {
 
     // Method to log in the user
     private void loginUser() {
-        String email = emailInput.getText().toString().trim();
+        String emailOrUsername = emailOrUsernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
 
         if (!validateInput()) {
             return;
         }
 
-        // Firebase Authentication: Log in with email and password
+        // Check if the input is an email or username
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailOrUsername).matches()) {
+            // Input is an email, proceed to login
+            loginWithEmail(emailOrUsername, password);
+        } else {
+            // Input is a username, find corresponding email
+            findEmailByUsername(emailOrUsername, password);
+        }
+    }
+
+    // Method to log in with email
+    private void loginWithEmail(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -93,19 +109,40 @@ public class LoginPage extends AppCompatActivity {
                 });
     }
 
+    // Method to find the email by username in the database
+    private void findEmailByUsername(String username, String password) {
+        usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        String email = userSnapshot.child("email").getValue(String.class);
+                        if (email != null) {
+                            loginWithEmail(email, password);
+                        } else {
+                            Toast.makeText(LoginPage.this, "Email not found for this username.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    Toast.makeText(LoginPage.this, "Username does not exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull com.google.firebase.database.DatabaseError databaseError) {
+                Toast.makeText(LoginPage.this, "Error accessing database", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     // Method to validate user input
     private boolean validateInput() {
-        String email = emailInput.getText().toString().trim();
+        String emailOrUsername = emailOrUsernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
 
-        // Email validation
-        if (email.isEmpty()) {
-            emailInput.setError("Email is required");
-            return false;
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailInput.setError("Enter a valid email address");
+        // Input validation for email/username
+        if (emailOrUsername.isEmpty()) {
+            emailOrUsernameInput.setError("Email or Username is required");
             return false;
         }
 

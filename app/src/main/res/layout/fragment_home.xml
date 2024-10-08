@@ -18,7 +18,6 @@
         android:layout_marginTop="30dp"
         android:gravity="center_vertical">
 
-
         <!-- User Greeting and Subtext -->
         <LinearLayout
             android:layout_width="0dp"
@@ -34,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hello, Buddy!"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textSize="28sp"
                 android:textColor="@color/text_color"
                 android:layout_marginBottom="8dp"/>
@@ -44,9 +44,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cook at home, enjoy your cozy space."
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textSize="14sp"
                 android:textColor="@color/text_color" />
         </LinearLayout>
+
         <!-- Profile Image -->
         <ImageView
             android:id="@+id/userProfileImage"
@@ -55,8 +57,6 @@
             android:src="@drawable/ic_profile"
             android:scaleType="centerCrop"
             android:background="@drawable/circle_background2" />
-
-
     </LinearLayout>
 
     <!-- Search Bar Container -->
@@ -83,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search any recipe"
+            android:fontFamily="sans-serif-condensed-medium"
             android:textColorHint="#FFFFFF"
             android:textColor="#FFFFFF"
             android:background="@android:color/transparent"
@@ -120,13 +121,15 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="Popular"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textSize="12sp"
-                android:textColor="@color/nav_item_selector" />
+                android:textColor="@color/nav_item_selector"
+                android:id="@+id/categoryPopular"/>
         </LinearLayout>
 
-        <!-- Western Category -->
+        <!-- Tiffin Category -->
         <LinearLayout
-            android:id="@+id/westernCategory"
+            android:id="@+id/tiffinCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -145,20 +148,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Tiffin"
                 android:textSize="12sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:id="@+id/categoryTiffin"/>
         </LinearLayout>
 
-        <!-- Drinks Category -->
+        <!-- Meals Category -->
         <LinearLayout
-            android:id="@+id/drinksCategory"
+            android:id="@+id/mealsCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="21dp"> <!-- Add margins between icons -->
+            android:layout_marginEnd="21dp">
 
             <ImageView
                 android:layout_width="40dp"
@@ -171,14 +176,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Meals"
                 android:textSize="12sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:id="@+id/categoryMeals"/>
         </LinearLayout>
 
-        <!-- Local Category -->
+        <!-- Snacks Category -->
         <LinearLayout
-            android:id="@+id/localCategory"
+            android:id="@+id/snacksCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -197,14 +204,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Snacks"
                 android:textSize="12sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:id="@+id/categorySnacks"/>
         </LinearLayout>
 
-        <!-- Dessert Category -->
+        <!-- Drinks Category -->
         <LinearLayout
-            android:id="@+id/dessertCategory"
+            android:id="@+id/drinksCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -223,12 +232,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Drinks"
                 android:textSize="12sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:id="@+id/categoryDrinks"/>
         </LinearLayout>
     </LinearLayout>
-
 
     <!-- Popular Recipes Title -->
     <TextView
@@ -245,8 +255,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true"
         android:layout_weight="1"
-        tools:listitem="@layout/item_recipe" />
+        android:paddingTop="10dp"
+    android:clipToPadding="false"
+    tools:listitem="@layout/item_recipe" />
+
 </LinearLayout>

@@ -96,7 +96,7 @@ public class RecipeUploadPage extends AppCompatActivity {
         // Add input validation for "Serves", "Cook time", and "Nutrition"
         servesEditText.addTextChangedListener(new AutoFillWatcher(servesEditText, " people"));
         cookTimeEditText.addTextChangedListener(new AutoFillWatcher(cookTimeEditText, " mins"));
-        nutritionEditText.addTextChangedListener(new AutoFillWatcher(nutritionEditText, " cal"));
+        nutritionEditText.addTextChangedListener(new AutoFillWatcher(nutritionEditText, " kcal"));
 
         // Initialize progress dialog for showing loading state
         progressDialog = new ProgressDialog(this);

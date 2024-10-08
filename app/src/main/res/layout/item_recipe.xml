@@ -1,0 +1,45 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="10dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@android:color/white"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image section with rounded corners, ensuring the image is fully contained -->
+        <ImageView
+            android:id="@+id/recipe_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:contentDescription="Recipe Image"
+        android:src="@drawable/ic_placeholder_image"
+        android:background="@drawable/rounded_image_background"/>
+
+        <!-- Recipe Title: placed below the image -->
+        <TextView
+            android:id="@+id/recipe_title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe Title"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:background="@android:color/white" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

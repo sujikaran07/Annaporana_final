@@ -21,7 +21,7 @@
         android:layout_margin="15dp"
         android:background="@drawable/rounded_bottom_nav_background"
         app:itemIconTint="@color/white"
-        app:itemIconSize="40dp"
+        app:itemIconSize="30dp"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/bottom_menu"
         app:labelVisibilityMode="unlabeled" />
