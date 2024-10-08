@@ -62,4 +62,17 @@
         <item name="android:textColor">@color/black</item> <!-- Changed text color for contrast -->
     </style>
 
+    <style name="RighteousTextStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/righteous_regular</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1.5</item>
+    </style>
+
+
 </resources>

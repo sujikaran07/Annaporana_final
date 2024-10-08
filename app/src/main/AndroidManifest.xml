@@ -9,12 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
 
     <!-- Required to check network connection state -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -99,7 +94,7 @@
         <activity
             android:name=".HomePage"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" /> <!-- This keeps BottomNavigationView fixed even when the keyboard opens -->
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 

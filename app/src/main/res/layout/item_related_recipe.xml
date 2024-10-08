@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp">
+
+    <!-- FrameLayout containing the imageView and overlays -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/border_white">
+
+        <!-- Image for the Recipe -->
+        <ImageView
+            android:id="@+id/recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:keepScreenOn="true"
+            android:background="@drawable/ic_placeholder_image"/>
+
+        <!-- Overlay Text (Recipe Name) on the image -->
+
+        <!-- User Info (User Profile and Name) overlay at the bottom left of the image -->
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:letterSpacing="0.08"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="8"
+            android:padding="5dp"
+            android:shadowColor="#000000"
+            android:text="Recipe Name"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="bottom|start"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <ImageView
+                android:id="@+id/user_profile"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_profile"
+                android:layout_marginEnd="4dp"
+                android:contentDescription="User Profile"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Rating, Time, Serves, Calories -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/recipe_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0 (0)"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/recipe_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="60 Min"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_time"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/recipe_serves"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="5 Serves"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_meal"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/recipe_calories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="780 Kcal"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/ic_cal"
+            android:drawablePadding="4dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

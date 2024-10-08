@@ -1,7 +1,9 @@
 package com.example.recipeapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -83,6 +85,12 @@ public class PageSettings extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Perform sign out logic here
                         FirebaseAuth.getInstance().signOut();
+
+                        // Clear SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear(); // Clear all stored user data
+                        editor.apply(); // Apply the changes
 
                         // After sign out, navigate to the GetStartPage
                         Intent intent = new Intent(PageSettings.this, GetStartPage.class);
