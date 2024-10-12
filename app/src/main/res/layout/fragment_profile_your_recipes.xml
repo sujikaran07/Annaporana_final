@@ -6,13 +6,13 @@
     android:background="#000000"
     android:padding="16dp">
 
-    <!-- Top bar with Settings Button aligned to the right -->
+    <!-- Top bar with Settings Icon aligned to the right -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp">
 
-        <!-- Settings Button on the top-right corner -->
+        <!-- Settings Icon -->
         <ImageButton
             android:id="@+id/settings_button"
             android:layout_width="wrap_content"
@@ -21,12 +21,11 @@
             android:background="?attr/selectableItemBackground"
             android:contentDescription="Settings"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp" />
     </RelativeLayout>
 
-    <!-- Profile Section containing Profile Image, Username, and Stats -->
+    <!-- Profile Picture and Info Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,29 +33,52 @@
         android:gravity="center"
         android:layout_marginBottom="16dp">
 
-        <!-- User's Profile Image -->
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/ic_profile"
-            android:layout_gravity="center"
-            android:contentDescription="Profile Picture"
-            android:layout_marginBottom="8dp" />
+        <!-- Profile Image and Edit Icon in FrameLayout to overlap -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <!-- Displaying User's Name Below Profile Image -->
+            <!-- Profile Image Centered -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="Profile Picture"
+                android:layout_gravity="center"
+                android:background="@drawable/circular_image"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true" />
+
+            <!-- Edit Icon Positioned on the Profile Picture -->
+            <ImageButton
+                android:id="@+id/edit_profile_button"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/circular_background"
+                android:contentDescription="Edit Profile"
+                android:padding="4dp"
+                android:src="@drawable/baseline_mode_edit_24" />
+        </FrameLayout>
+
+        <!-- User Name Below Profile Image -->
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"
+            android:fontFamily="sans-serif-condensed-medium"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp" />
 
-        <!-- Followers, Following, and Likes Stats Section -->
+        <!-- Followers, Following, Likes Centered -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text=" followers"
                 android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textSize="14sp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp" />
@@ -93,6 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" following"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:layout_marginEnd="16dp"
@@ -110,13 +134,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" likes"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Tabs for navigating between different sections: Saved Recipes, Activity, and Your Recipes -->
+    <!-- Tabs: Saved Recipes, Your Recipes -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,36 +149,32 @@
 
         <Button
             android:id="@+id/saved_recipes_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="13dp"
+            android:layout_weight="1"
             android:textAllCaps="false"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:backgroundTint="@color/black"
+            android:textSize="18dp"
+            android:layout_marginEnd="10dp"
             android:text="Saved Recipes"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/activity_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Activity"
-            android:textSize="13dp"
-            android:textAllCaps="false"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="#FFFFFF"
-            android:layout_marginEnd="8dp" />
-
-        <Button
             android:id="@+id/your_recipes_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:textAllCaps="false"
             android:text="Your Recipes"
-            android:textSize="13dp"
+            android:layout_marginStart="10dp"
+            android:textSize="18dp"
             android:backgroundTint="@android:color/transparent"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
-    <!-- Search Bar for finding recipes -->
+    <!-- Search Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -174,76 +195,73 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search 0 recipes"
+            android:fontFamily="sans-serif-condensed-medium"
             android:textColorHint="#FFFFFF"
             android:textColor="#FFFFFF"
             android:background="@android:color/transparent"
             android:paddingStart="8dp"/>
     </LinearLayout>
 
-    <!-- Scrollable Section for displaying saved recipes -->
+    <!-- Scrollable Section for Recipes -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="16dp">
 
+        <!-- Container for displaying saved recipes or a message if none are available -->
         <LinearLayout
+            android:id="@+id/saved_recipes_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:padding="16dp">
 
-            <!-- Container for displaying saved recipes or a message if none are available -->
-            <LinearLayout
-                android:id="@+id/saved_recipes_layout"
-                android:layout_width="match_parent"
+            <!-- Message displayed when there are no recipes -->
+
+            <TextView
+                android:id="@+id/no_uploaded_recipes"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="No recipes yet"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create your own recipes to explore and enjoy right here!"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="15sp"
                 android:gravity="center"
-                android:padding="16dp">
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="8dp"/>
 
-                <!-- Message displayed when there are no your recipes recipes -->
-                <TextView
-                    android:id="@+id/no_saved_recipes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No recipes yet"
-                    android:layout_marginBottom="20dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Create your own recipes to explore and enjoy right here!"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:layout_marginBottom="40dp"
-                    android:layout_marginTop="8dp"/>
-
-                <!-- Button to add a new recipe -->
-                <Button
-                    android:id="@+id/btnCreateRecipe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="100dp"
-                    android:background="@drawable/btn_radius"
-                    android:padding="10dp"
-                    android:text="Create a recipe"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    style="@style/CustomButtonStyle2"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Placeholder for dynamically adding saved recipe items -->
+            <!-- Button to add a new recipe -->
+            <Button
+                android:id="@+id/btnCreateRecipe"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/btn_7"
+                android:padding="10dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Create a recipe"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                style="@style/CustomButtonStyle2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 </LinearLayout>

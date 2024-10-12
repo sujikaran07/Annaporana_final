@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/search_background"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:padding="8dp">
 
         <!-- Search Icon (acts as the search button) -->
@@ -95,7 +95,7 @@
         android:id="@+id/categoryButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         android:gravity="start">
 
@@ -248,7 +248,7 @@
         android:text="Popular Recipes"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:textColor="@android:color/white" />
 
     <!-- Scrollable Popular Recipes -->
@@ -259,6 +259,7 @@
         android:nestedScrollingEnabled="true"
         android:layout_weight="1"
         android:paddingTop="10dp"
+        android:layout_marginBottom="10dp"
     android:clipToPadding="false"
     tools:listitem="@layout/item_recipe" />
 

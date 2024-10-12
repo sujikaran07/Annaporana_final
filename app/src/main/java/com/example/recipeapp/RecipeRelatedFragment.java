@@ -2,20 +2,16 @@ package com.example.recipeapp;
 
 import android.os.Bundle;
 import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +43,7 @@ public class RecipeRelatedFragment extends Fragment implements RelatedRecipeAdap
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_related, container, false);
 
         // Initialize views
@@ -74,13 +69,12 @@ public class RecipeRelatedFragment extends Fragment implements RelatedRecipeAdap
         // Load related recipes based on the selected title
         loadRelatedRecipes();
 
-        // Set up back button functionality
-        backButton.setOnClickListener(v -> requireActivity().onBackPressed());
+        // Set back button click listener to navigate back to HomeFragment
+        backButton.setOnClickListener(v -> navigateToHomeFragment());
 
         return view;
     }
 
-    // Load related recipes based on the recipe title keywords
     private void loadRelatedRecipes() {
         String[] keywords = recipeTitle.split(" "); // Split recipe title into individual keywords
 
@@ -98,19 +92,21 @@ public class RecipeRelatedFragment extends Fragment implements RelatedRecipeAdap
                             String time = recipeSnapshot.child("cookTime").getValue(String.class);
                             String serves = recipeSnapshot.child("serves").getValue(String.class);
                             String calories = recipeSnapshot.child("nutrition").getValue(String.class);
-                            String userId = recipeSnapshot.child("userId").getValue(String.class);  // Get userId
+                            String userId = recipeSnapshot.child("userId").getValue(String.class);
+                            String recipeId = recipeSnapshot.getKey();  // Assuming the key is the recipe ID
 
                             // Check if any keyword matches in the recipe title
                             if (title != null && containsAnyKeyword(title, keywords)) {
                                 // Add the related recipe to the list
-                                RelatedRecipe relatedRecipe = new RelatedRecipe(title, imageUrl, "4.5", time, serves, calories, userId);
+                                RelatedRecipe relatedRecipe = new RelatedRecipe(title, imageUrl, "0 (0)", time, serves, calories, userId, recipeId);
                                 relatedRecipeList.add(relatedRecipe);
+                                // Fetch rating for the related recipe
+                                fetchRecipeRating(recipeId, relatedRecipe);
                             }
                         }
                     }
                 }
 
-                // Notify the adapter of changes
                 relatedRecipeAdapter.notifyDataSetChanged();
             }
 
@@ -121,20 +117,64 @@ public class RecipeRelatedFragment extends Fragment implements RelatedRecipeAdap
         });
     }
 
-    // Helper method to check if the recipe title contains any of the keywords
+    private void fetchRecipeRating(String recipeId, RelatedRecipe relatedRecipe) {
+        DatabaseReference recipeReviewsRef = FirebaseDatabase.getInstance().getReference("reviews").child(recipeId);
+
+        recipeReviewsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Double totalRatingSum = snapshot.child("totalRatingSum").getValue(Double.class);
+                    Long totalRatings = snapshot.child("totalRatings").getValue(Long.class);
+
+                    if (totalRatingSum != null && totalRatings != null && totalRatings > 0) {
+                        // Calculate average rating and update relatedRecipe
+                        double averageRating = totalRatingSum / totalRatings;
+                        String rating = String.format("%.1f (%d)", averageRating, totalRatings);
+                        relatedRecipe.setRating(rating);
+                    } else {
+                        // If no ratings are available
+                        relatedRecipe.setRating("0 (0)");
+                    }
+                } else {
+                    relatedRecipe.setRating("0 (0)"); // If no rating data is found
+                }
+
+                relatedRecipeAdapter.notifyDataSetChanged(); // Notify adapter to refresh the UI
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("RecipeRelatedFragment", "Error fetching recipe rating: " + error.getMessage());
+            }
+        });
+    }
+
     private boolean containsAnyKeyword(String title, String[] keywords) {
         for (String keyword : keywords) {
             if (title.toLowerCase().contains(keyword.toLowerCase())) {
-                return true; // Return true if any keyword matches
+                return true;
             }
         }
-        return false; // Return false if no keyword matches
+        return false;
     }
 
-    // Handle recipe click event
     @Override
-    public void onRecipeClick(String recipeTitle) {
-        // Handle recipe click, navigate or show more details
-        // Example: Navigate to another fragment with full recipe details
+    public void onRecipeClick(String recipeTitle, String userId, String recipeId) {
+        // Navigate to RecipeDetailFragment and pass recipeTitle, userId, and recipeId
+        RecipeDetailedFragment recipeDetailFragment = RecipeDetailedFragment.newInstance(recipeTitle, recipeId, userId);
+
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, recipeDetailFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void navigateToHomeFragment() {
+        HomeFragment homeFragment = new HomeFragment();
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, homeFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

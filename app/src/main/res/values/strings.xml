@@ -34,4 +34,10 @@
         <item>Snacks</item>
         <item>Drinks</item>
     </string-array>
+
+    <string name="recipe_time_format">Cook time: %1$s</string>
+    <string name="recipe_serves_format">Serves: %1$s</string>
+    <string name="recipe_calories_format">Calories: %1$s</string>
+    <string name="default_username">Developer</string>
+    <string name="unknown_user">Unknown User</string>
 </resources>

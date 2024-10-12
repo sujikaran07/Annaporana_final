@@ -1,0 +1,76 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#000000">
+
+    <!-- Title and Buttons Container -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Cancel"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="#FFFFFF"
+            android:padding="8dp"
+            style="@style/CustomButtonStyle10"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bio"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <!-- Input Field with Bottom Border -->
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:hint="Something write here"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC" />
+
+
+
+    <!-- Character Count -->
+    <TextView
+        android:id="@+id/character_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="0/30"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+</LinearLayout>

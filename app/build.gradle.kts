@@ -41,6 +41,8 @@ dependencies {
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.activity:activity:1.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
 
     implementation("com.google.firebase:firebase-auth:21.0.1")
     implementation("com.google.firebase:firebase-firestore:23.0.3")

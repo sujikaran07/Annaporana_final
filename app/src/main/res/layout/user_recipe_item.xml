@@ -15,6 +15,7 @@
         android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:contentDescription="Recipe Image"
+        android:adjustViewBounds="true"
         app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
 
     <!-- Recipe Info Section -->
@@ -34,8 +35,9 @@
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1" />
 
         <!-- Recipe Description -->
         <TextView
@@ -45,18 +47,9 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:layout_marginTop="4dp"
             android:textColor="#B0B0B0"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:ellipsize="end"
+            android:maxLines="2" />
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/delete_recipe_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_more_vert_24"
-        android:contentDescription="Delete Recipe"
-        android:background="?attr/selectableItemBackground"
-        android:layout_gravity="top"
-        android:padding="8dp"
-        app:tint="@color/white" />
 
 </LinearLayout>

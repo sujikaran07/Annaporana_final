@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,9 +33,13 @@ public class LoginPage extends AppCompatActivity {
 
         // Initialize Firebase Auth and Database reference
         mAuth = FirebaseAuth.getInstance();
-        usersRef = FirebaseDatabase.getInstance().getReference("users");  // Reference to "users" node in Firebase Realtime Database
+        usersRef = FirebaseDatabase.getInstance().getReference("users");  // Reference to "users" node
 
         // Initialize UI components
+        initUI();
+    }
+
+    private void initUI() {
         emailOrUsernameInput = findViewById(R.id.input_field);
         passwordInput = findViewById(R.id.password_input);
         rememberMeCheckbox = findViewById(R.id.remember_me_checkbox);
@@ -42,36 +47,23 @@ public class LoginPage extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_button);
         TextView forgotPassword = findViewById(R.id.forgot_password_text);
         TextView signUpText = findViewById(R.id.sign_up_text);
-        ImageView backArrow = findViewById(R.id.ic_back_arrow);  // Back arrow
+        ImageView backArrow = findViewById(R.id.ic_back_arrow);
 
-        // Password toggle visibility
-        eyeIcon.setOnClickListener(v -> togglePasswordVisibility());
-
-        // Login Button action
-        loginButton.setOnClickListener(v -> loginUser());
-
-        // Forgot password action
-        forgotPassword.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginPage.this, ForgotPasswordPage.class);
-            startActivity(intent);
-        });
-
-        // Sign-up link to go to RegisterPage
-        signUpText.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginPage.this, RegisterPage.class);
-            startActivity(intent);
-            finish();
-        });
-
-        // Back arrow action to go to SplashPage
-        backArrow.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginPage.this, SplashPage.class);
-            startActivity(intent);
-            finish();
-        });
+        // Setup listeners
+        setupListeners(eyeIcon, loginButton, forgotPassword, signUpText, backArrow);
     }
 
-    // Method to log in the user
+    private void setupListeners(ImageView eyeIcon, Button loginButton, TextView forgotPassword, TextView signUpText, ImageView backArrow) {
+        eyeIcon.setOnClickListener(v -> togglePasswordVisibility());
+        loginButton.setOnClickListener(v -> loginUser());
+        forgotPassword.setOnClickListener(v -> startActivity(new Intent(LoginPage.this, ForgotPasswordPage.class)));
+        signUpText.setOnClickListener(v -> {
+            startActivity(new Intent(LoginPage.this, RegisterPage.class));
+            finish();
+        });
+        backArrow.setOnClickListener(v -> finish());
+    }
+
     private void loginUser() {
         String emailOrUsername = emailOrUsernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
@@ -80,88 +72,68 @@ public class LoginPage extends AppCompatActivity {
             return;
         }
 
-        // Check if the input is an email or username
         if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailOrUsername).matches()) {
-            // Input is an email, proceed to login
+            // Input is an email
             loginWithEmail(emailOrUsername, password);
         } else {
-            // Input is a username, find corresponding email
+            // Input is a username
             findEmailByUsername(emailOrUsername, password);
         }
     }
 
-    // Method to log in with email
     private void loginWithEmail(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            // Navigate to home page
-                            Intent intent = new Intent(LoginPage.this, HomePage.class);
-                            startActivity(intent);
-                            finish();
-                        }
+                        proceedToHome();
                     } else {
-                        // Show error message if login fails
-                        Toast.makeText(LoginPage.this, "Email or password is incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    // Method to find the email by username in the database
     private void findEmailByUsername(String username, String password) {
         usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                        String email = userSnapshot.child("email").getValue(String.class);
-                        if (email != null) {
-                            loginWithEmail(email, password);
-                        } else {
-                            Toast.makeText(LoginPage.this, "Email not found for this username.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                    String email = dataSnapshot.getChildren().iterator().next().child("email").getValue(String.class);
+                    loginWithEmail(email, password);
                 } else {
                     Toast.makeText(LoginPage.this, "Username does not exist", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull com.google.firebase.database.DatabaseError databaseError) {
-                Toast.makeText(LoginPage.this, "Error accessing database", Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(LoginPage.this, "Failed to query database", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    // Method to validate user input
     private boolean validateInput() {
-        String emailOrUsername = emailOrUsernameInput.getText().toString().trim();
-        String password = passwordInput.getText().toString().trim();
-
-        // Input validation for email/username
-        if (emailOrUsername.isEmpty()) {
+        if (emailOrUsernameInput.getText().toString().trim().isEmpty()) {
             emailOrUsernameInput.setError("Email or Username is required");
             return false;
         }
-
-        // Password validation
-        if (password.isEmpty()) {
+        if (passwordInput.getText().toString().trim().isEmpty()) {
             passwordInput.setError("Password is required");
             return false;
         }
-
         return true;
     }
 
-    // Method to toggle password visibility
     private void togglePasswordVisibility() {
-        if (passwordInput.getInputType() == 129) {  // If password is hidden
-            passwordInput.setInputType(1);  // Show password
+        if (passwordInput.getInputType() == 129) {
+            passwordInput.setInputType(1);
         } else {
-            passwordInput.setInputType(129);  // Hide password
+            passwordInput.setInputType(129);
         }
-        passwordInput.setSelection(passwordInput.length());  // Move cursor to end
+        passwordInput.setSelection(passwordInput.length());
+    }
+
+    private void proceedToHome() {
+        startActivity(new Intent(this, HomePage.class));
+        finish();
     }
 }

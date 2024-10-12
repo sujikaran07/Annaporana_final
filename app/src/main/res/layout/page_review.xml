@@ -1,102 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#000000"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".Page_Review">
+    android:gravity="center"
+    android:background="@drawable/rating"
+    android:padding="16dp">
 
 
 
-    <!-- Tip for food name -->
+    <!-- Text asking for feedback -->
     <TextView
-        android:id="@+id/tip_Text"
+        android:id="@+id/feedbackText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share your tip for the Food Name"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="230dp" />
+        android:text="How did you like the recipe?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp" />
 
-    <!-- Image placed between text and rating stars -->
-    <ImageView
-        android:id="@+id/image_placeholder"
+    <!-- Text description -->
+
+    <!-- RatingBar -->
+    <TextView
+        android:id="@+id/feedbackDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/review"
-        />
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="Could you take 60 seconds to share your experience with us?"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
-    <!-- Star rating -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:numStars="5"
+        android:stepSize="1"
+        android:layout_gravity="center"
+        android:theme="@style/RatingBarStyle"
+        android:layout_marginBottom="30dp"/>
+
+    <!-- Call to Action Text -->
+    <TextView
+        android:id="@+id/callToActionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit : )"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:gravity="center"
-        android:layout_marginTop="24dp">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star_rate"
-            app:tint="@color/white" />
-    </LinearLayout>
-    <!-- Cancel and Submit buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:weightSum="2">
-
-        <TextView
-            android:id="@+id/Cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:text="Cancel"
-            android:textColor="#A52A2A"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/Submit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Submit"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
