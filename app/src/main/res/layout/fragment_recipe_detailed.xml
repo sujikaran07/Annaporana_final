@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_recipe_detailed.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#000000"
-    android:padding="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
 
     <!-- Header with Back Button and Recipe Name -->
     <LinearLayout
@@ -12,22 +16,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
 
         <ImageButton
             android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back_arrow"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
             android:contentDescription="Back"
             android:layout_marginEnd="10dp" />
 
         <TextView
             android:id="@+id/recipe_name"
             android:layout_width="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
             android:layout_height="wrap_content"
-            android:text="New Recipe"
+            android:text="Recipe Name"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -48,48 +54,56 @@
     </FrameLayout>
 
     <!-- Action Buttons -->
-
-    <!-- User Profile -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
+            android:id="@+id/like_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Like"
             android:src="@drawable/baseline_favorite_24" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
+            android:id="@+id/rate_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Rate"
             android:src="@drawable/ic_star_rate" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
+            android:id="@+id/share_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Share"
             android:src="@drawable/ic_share_24" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/bookmark_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="More Options"
+            android:contentDescription="Bookmark"
             android:src="@drawable/baseline_bookmark_24" />
     </LinearLayout>
 
+    <!-- User Profile -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -113,7 +127,7 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User"
+                android:text="Name"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
@@ -121,7 +135,7 @@
                 android:id="@+id/user_handle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="user23"
+                android:text="@user23"
                 android:textColor="#AAAAAA"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -145,79 +159,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingredients"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
-            <!-- Editable Ingredients Section -->
-            <LinearLayout
-                android:id="@+id/ingredients_container"
+            <!-- Ingredients Content -->
+            <TextView
+                android:id="@+id/ingredients_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- Example Ingredient Field -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="5dp">
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="Ingredient"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#AAAAAA"
-                        android:background="@android:color/transparent"
-                        android:textSize="14sp"
-                        android:padding="5dp"
-                        android:inputType="text" />
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Quantity"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#AAAAAA"
-                        android:background="@android:color/transparent"
-                        android:textSize="14sp"
-                        android:padding="5dp"
-                        android:inputType="text" />
-                </LinearLayout>
-            </LinearLayout>
-
-
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:padding="5dp" />
 
             <!-- Methods Section Title -->
             <TextView
                 android:id="@+id/methods_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Methods"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="10dp" />
 
-            <!-- Editable Methods Section -->
-            <EditText
+            <!-- Methods Content -->
+            <TextView
                 android:id="@+id/methods_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cooking methods"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#AAAAAA"
-                android:background="@android:color/transparent"
                 android:textSize="14sp"
-                android:padding="5dp"
-                android:inputType="textMultiLine"
-                android:gravity="top"
-                android:minLines="5" />
+                android:padding="5dp" />
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

@@ -42,7 +42,7 @@
             android:shadowColor="#000000"
             android:text="Recipe Name"
             android:textColor="#FFFFFF"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -86,7 +86,7 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/recipe_rating"
+            android:id="@+id/recipe_rating_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="0 (0)"

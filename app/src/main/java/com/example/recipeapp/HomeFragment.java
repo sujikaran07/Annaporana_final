@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +36,8 @@ public class HomeFragment extends Fragment implements RecipeAdapter.OnRecipeClic
     private List<Recipe> recipeList;
     private EditText searchInput;
     private TextView userGreeting, popularTitle;
-    private DatabaseReference databaseReference;
+    private ImageView profileImageView;  // Add ImageView for profile image
+    private DatabaseReference databaseReference, usersRef;
     private SharedPreferences sharedPreferences;
     private static final String TAG = "HomeFragment";
 
@@ -47,6 +50,7 @@ public class HomeFragment extends Fragment implements RecipeAdapter.OnRecipeClic
         searchInput = view.findViewById(R.id.search_recipes);
         userGreeting = view.findViewById(R.id.userGreeting);
         popularTitle = view.findViewById(R.id.popularTitle);
+        profileImageView = view.findViewById(R.id.userProfileImage);  // Initialize the profile image view
 
         // Initialize SharedPreferences
         sharedPreferences = getContext().getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
@@ -68,6 +72,9 @@ public class HomeFragment extends Fragment implements RecipeAdapter.OnRecipeClic
 
         // Load the user's greeting from SharedPreferences or Firebase
         loadUserGreeting();
+
+        // Load the user's profile image from Firebase
+        loadUserProfileImage();
 
         // Load recipes by default
         loadRecipes();
@@ -94,15 +101,15 @@ public class HomeFragment extends Fragment implements RecipeAdapter.OnRecipeClic
 
     // Load user's greeting from SharedPreferences or Firebase
     private void loadUserGreeting() {
-        String savedUsername = sharedPreferences.getString("username", null);
-        if (savedUsername != null) {
-            userGreeting.setText("Hello, " + savedUsername + "!");
+        String savedName = sharedPreferences.getString("name", null);  // Change key to "name"
+        if (savedName != null) {
+            userGreeting.setText("Hello, " + savedName + "!");
         } else {
             fetchAndSaveUserNameFromFirebase();
         }
     }
 
-    // Fetch username from Firebase and save it in SharedPreferences
+    // Fetch user's name from Firebase and save it in SharedPreferences
     private void fetchAndSaveUserNameFromFirebase() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
@@ -110,10 +117,11 @@ public class HomeFragment extends Fragment implements RecipeAdapter.OnRecipeClic
         usersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String userName = snapshot.child("username").getValue(String.class);
+                // Fetch user's name instead of username
+                String userName = snapshot.child("name").getValue(String.class);
                 if (userName != null) {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("username", userName);
+                    editor.putString("name", userName);  // Save user's name in SharedPreferences
                     editor.apply();
                     userGreeting.setText("Hello, " + userName + "!");
                 } else {
@@ -125,6 +133,28 @@ public class HomeFragment extends Fragment implements RecipeAdapter.OnRecipeClic
             public void onCancelled(@NonNull DatabaseError error) {
                 userGreeting.setText("Hello, Buddy!");
                 Log.e(TAG, "Error loading user data: " + error.getMessage());
+            }
+        });
+    }
+
+    // Load user's profile image from Firebase
+    private void loadUserProfileImage() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+
+        usersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String profileImageUrl = snapshot.child("profileImageUrl").getValue(String.class);
+                if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                    // Use Picasso to load the profile image into ImageView with CircleTransform for rounded image
+                    Picasso.get().load(profileImageUrl).transform(new CircleTransform()).into(profileImageView);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "Error loading profile image: " + error.getMessage());
             }
         });
     }

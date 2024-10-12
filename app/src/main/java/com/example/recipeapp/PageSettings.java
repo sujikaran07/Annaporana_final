@@ -18,112 +18,74 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PageSettings extends AppCompatActivity {
 
-    // Declare the TextViews, Button, and Back Arrow ImageView
     private TextView inviteFriends, privacyPolicy, aboutApp;
     private Button signOutButton;
-    private ImageView backArrow; // Back arrow ImageView
+    private ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_page1); // Ensure your layout file is named correctly
+        setContentView(R.layout.settings_page1);
 
-        // Initialize TextViews, Button, and Back Arrow
         inviteFriends = findViewById(R.id.invite_friends);
         privacyPolicy = findViewById(R.id.privacyPolicy);
         aboutApp = findViewById(R.id.aboutApp);
         signOutButton = findViewById(R.id.signOutButton);
-        backArrow = findViewById(R.id.backArrow); // Initialize back arrow
+        backArrow = findViewById(R.id.backArrow);
 
-        // Set click listener for back arrow
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Finish the current activity to go back to the previous screen
-                finish();
-            }
-        });
+        backArrow.setOnClickListener(v -> finish());
+        inviteFriends.setOnClickListener(v -> startActivity(new Intent(this, InviteFriendsActivity.class)));
+        privacyPolicy.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://your-privacy-policy-url.com"))));
 
-        // Set click listener for Invite Friends TextView
-        inviteFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to Invite Friends page when clicked
-                Intent intent = new Intent(PageSettings.this, InviteFriendsActivity.class);
-                startActivity(intent); // Starts the InviteFriendsActivity
-            }
-        });
+        signOutButton.setOnClickListener(v -> confirmSignOut());
+    }
 
-        // Privacy policy click listener
-        privacyPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Define the URL for the privacy policy
-                String url = "https://your-privacy-policy-url.com";
+    private void confirmSignOut() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sign out");
+        builder.setMessage("Do you want to sign out?");
+        builder.setPositiveButton("Yes", this::signOut);
+        builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(this::customizeDialogButtons);
+        dialog.show();
+    }
 
-                // Create an intent to open the browser with the URL
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
+    private void signOut(DialogInterface dialog, int which) {
+        // Save any data needed before signing out
+        saveDataBeforeSignOut();
 
-                // Start the activity (browser) with the intent
-                startActivity(intent);
-            }
-        });
+        // Sign out from Firebase
+        FirebaseAuth.getInstance().signOut();
 
-        // Handle sign out button click
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create custom AlertDialog to show confirmation
-                AlertDialog.Builder builder = new AlertDialog.Builder(PageSettings.this);
-                builder.setTitle("Sign out");
-                builder.setMessage("Do you want to sign out?");
+        // Clear all data in SharedPreferences
+        clearSharedPreferences();
 
-                // Set the positive button ("Yes") to confirm sign out
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Perform sign out logic here
-                        FirebaseAuth.getInstance().signOut();
+        // Redirect user to the GetStartPage
+        navigateToStartPage();
+    }
 
-                        // Clear SharedPreferences
-                        SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.clear(); // Clear all stored user data
-                        editor.apply(); // Apply the changes
+    private void saveDataBeforeSignOut() {
+        // Implement data save logic here if needed
+    }
 
-                        // After sign out, navigate to the GetStartPage
-                        Intent intent = new Intent(PageSettings.this, GetStartPage.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
-                        startActivity(intent);
-                        finish(); // Close current activity to prevent return
-                    }
-                });
+    private void clearSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 
-                // Set the negative button ("No") to dismiss the dialog
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Dismiss the dialog and stay on the settings page
-                        dialog.dismiss();
-                    }
-                });
+    private void navigateToStartPage() {
+        Intent intent = new Intent(this, GetStartPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 
-                // Create and show the dialog
-                final AlertDialog dialog = builder.create();
-
-                // Set OnShowListener to customize the button colors after the dialog is shown
-                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialogInterface) {
-                        // Customize the buttons after the dialog is shown
-                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(android.R.color.holo_green_dark));
-                    }
-                });
-
-                dialog.show();
-            }
-        });
+    private void customizeDialogButtons(DialogInterface dialogInterface) {
+        AlertDialog dialog = (AlertDialog) dialogInterface;
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(android.R.color.holo_green_dark));
     }
 }

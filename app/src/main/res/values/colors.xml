@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#00FF00</color>
+    <color name="myapp_button_color2">#FFEB3B</color>
     <color name="myapp_button_color">#0DD362</color>
     <color name="text_color">#FFFFFF</color>
 </resources>

@@ -17,20 +17,12 @@
             android:id="@+id/back_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_back_arrow"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
             android:background="?attr/selectableItemBackground"
             android:contentDescription="Back"
             android:layout_alignParentStart="true" />
 
-        <!-- Settings Icon -->
-        <ImageButton
-            android:id="@+id/settings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_settings"
-            android:background="?attr/selectableItemBackground"
-            android:contentDescription="Settings"
-            android:layout_alignParentEnd="true" />
+
     </RelativeLayout>
 
     <!-- Profile Image and Info Section -->
@@ -38,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
 
         <!-- Profile Image Left Aligned -->
         <ImageView
@@ -46,6 +39,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_profile"
+            android:background="@drawable/circle_background2"
             android:contentDescription="Profile Picture"
             android:layout_marginEnd="16dp"
             android:layout_gravity="center_vertical" />
@@ -80,61 +74,86 @@
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+
 
     <!-- Followers, Following, Likes Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginBottom="8dp">
 
         <TextView
-            android:id="@+id/following_count"
-            android:layout_width="0dp"
+            android:id="@+id/followers_count"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 Following"
+            android:text="0"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="center" />
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/followers_count"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 Followers"
+            android:text=" followers"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="center" />
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:id="@+id/following_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" following"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="8dp" />
 
         <TextView
             android:id="@+id/likes_count"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 Likes"
+            android:text="0"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="center" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" likes"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <!-- Follow Button -->
+
     <Button
         android:id="@+id/follow_button"
+        style="@style/CustomButtonStyle4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Follow"
+        android:layout_gravity="start"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/btn_radius"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
+        android:text="Follow"
         android:textColor="@color/black"
-        android:backgroundTint="@android:color/white"
-        android:textSize="14sp"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="start" />
+        android:textSize="18sp" />
 
     <Space
         android:layout_width="match_parent"
@@ -153,20 +172,13 @@
             android:id="@+id/recipes_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Recipes(2)"
+            android:text="Recipes(0)"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_weight="1" />
 
         <!-- Search Icon (Right Aligned) -->
-        <ImageButton
-            android:id="@+id/search_recipes_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:background="?attr/selectableItemBackground"
-            android:contentDescription="Search Recipes" />
     </LinearLayout>
 
     <!-- Recipes List -->

@@ -10,11 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import java.util.List;
 
 public class RelatedRecipeAdapter extends RecyclerView.Adapter<RelatedRecipeAdapter.RelatedRecipeViewHolder> {
@@ -55,10 +51,14 @@ public class RelatedRecipeAdapter extends RecyclerView.Adapter<RelatedRecipeAdap
         // Fetch and display the username based on userId
         fetchUserName(recipe.getUserId(), holder.userNameTextView);
 
+        // Fetch and display the rating for the recipe
+        fetchRecipeRating(recipe.getRecipeId(), holder.ratingTextView);
+
         // Set click listener
         holder.itemView.setOnClickListener(v -> {
             if (onRecipeClickListener != null) {
-                onRecipeClickListener.onRecipeClick(recipe.getTitle());
+                // Pass recipeTitle, userId, and recipeId to the listener
+                onRecipeClickListener.onRecipeClick(recipe.getTitle(), recipe.getUserId(), recipe.getRecipeId());
             }
         });
     }
@@ -94,12 +94,42 @@ public class RelatedRecipeAdapter extends RecyclerView.Adapter<RelatedRecipeAdap
         });
     }
 
+    // Helper method to fetch and display the recipe rating
+    private void fetchRecipeRating(String recipeId, TextView ratingTextView) {
+        if (recipeId == null) {
+            ratingTextView.setText("0.0 (0)");
+            return; // Return early if recipeId is null
+        }
+
+        // Reference to the reviews node inside the specific recipe
+        DatabaseReference recipeRef = FirebaseDatabase.getInstance().getReference("recipes").child(recipeId).child("reviews");
+        recipeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Double averageRating = snapshot.child("averageRating").getValue(Double.class);
+                Long totalRatings = snapshot.child("totalRatings").getValue(Long.class);
+
+                // Set the rating text with the format: "AverageRating (TotalRatings)"
+                if (averageRating != null && totalRatings != null) {
+                    ratingTextView.setText(String.format("%.1f (%d)", averageRating, totalRatings));
+                } else {
+                    ratingTextView.setText("0.0 (0)");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                ratingTextView.setText("0.0 (0)");
+            }
+        });
+    }
+
     public interface OnRecipeClickListener {
-        void onRecipeClick(String recipeTitle);
+        void onRecipeClick(String recipeTitle, String userId, String recipeId);  // Pass recipeId as well
     }
 
     public static class RelatedRecipeViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView, timeTextView, servesTextView, caloriesTextView, userNameTextView;
+        TextView titleTextView, timeTextView, servesTextView, caloriesTextView, userNameTextView, ratingTextView;
         ImageView recipeImageView;
 
         public RelatedRecipeViewHolder(@NonNull View itemView) {
@@ -109,7 +139,8 @@ public class RelatedRecipeAdapter extends RecyclerView.Adapter<RelatedRecipeAdap
             timeTextView = itemView.findViewById(R.id.recipe_time);
             servesTextView = itemView.findViewById(R.id.recipe_serves);
             caloriesTextView = itemView.findViewById(R.id.recipe_calories);
-            userNameTextView = itemView.findViewById(R.id.user_name); // Assuming user_name is part of the layout
+            userNameTextView = itemView.findViewById(R.id.user_name);
+            ratingTextView = itemView.findViewById(R.id.recipe_rating_text_view); // Added rating field
         }
     }
 }

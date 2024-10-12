@@ -241,10 +241,10 @@ public class ProfileFragment extends Fragment {
                     if (snapshot.exists()) {
                         String name = snapshot.child("username").getValue(String.class);
                         String profileImageUrl = snapshot.child("profileImageUrl").getValue(String.class);
-                        Long followersCount = snapshot.child("followersCount").getValue(Long.class);
+                        int followersCount = snapshot.child("followersCount").getValue(Integer.class);
 
                         userNameTextView.setText(name != null ? name : "Buddy");
-                        followersCountTextView.setText(followersCount != null ? String.valueOf(followersCount) : "0");
+                        followersCountTextView.setText(String.valueOf(followersCount));
 
                         if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                             Picasso.get().load(profileImageUrl).into(profileImageView);

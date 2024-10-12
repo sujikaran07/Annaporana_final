@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="16dp"
+    tools:context="EditProfile">
+
+    <!-- Back Arrow and Title in Horizontal LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Back Arrow -->
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back" />
+
+        <!-- Title "Edit Profile" -->
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit profile"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Profile Image Section with Change Photo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="32dp">
+
+        <!-- FrameLayout to overlay camera icon on the profile image -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Profile Image -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_profile"
+                android:background="@drawable/circular_image"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true" />
+
+            <!-- Camera Icon Overlay on Profile Image -->
+            <ImageButton
+                android:id="@+id/camera_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_photo_camera_24"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:contentDescription="Change Photo"
+                app:tint="#5B5858" />
+        </FrameLayout>
+
+        <!-- Change Photo Text -->
+        <TextView
+            android:id="@+id/change_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change photo"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+    <!-- "About You" Section Title -->
+    <TextView
+        android:id="@+id/about_you_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About you"
+        android:textColor="#777777"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Name Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/name_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/name_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="User Name"
+            android:layout_marginEnd="20dp"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:gravity="end" />
+
+        <!-- Edit Icon -->
+        <ImageView
+            android:id="@+id/name_edit_icon"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_edit"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Edit Name"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- Username Section -->
+
+    <!-- Bio Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/username_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/username_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:text="user_name"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp" />
+
+        <!-- Edit Icon -->
+        <ImageView
+            android:id="@+id/username_edit_icon"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="2dp"
+            android:contentDescription="Edit Username"
+            android:src="@drawable/ic_edit"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/bio_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bio"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bio_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="2"
+            android:text="This is the bio text"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:gravity="end" />
+
+        <!-- Edit Icon -->
+        <ImageView
+            android:id="@+id/bio_edit_icon"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Edit Bio"
+            app:tint="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Space to push the button to the bottom -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Save Button at the Bottom -->
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textSize="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        style="@style/CustomButtonStyle2"
+        android:background="@drawable/btn_radius"
+        android:textColor="@color/white" />
+
+</LinearLayout>

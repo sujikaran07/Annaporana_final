@@ -1,0 +1,5 @@
+<!-- res/drawable/underline_green.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="2dp"/>
+    <solid android:color="@color/myapp_button_color"/>
+</shape>
